@@ -42,6 +42,8 @@ export function CreateAnswer(offer)
 	if(Client == null)
 	{
 		Client = new RTCPeerConnection(iceConfiguration);
+		
+		//ini diubah jadi ngirim data ice candidate
 		Client.onicecandidate = () => {runtime.callFunction("SignalIceCandidate",[JSON.stringify(Client.localDescription)])};
 		
 		Client.ondatachannel = e => 
@@ -52,10 +54,22 @@ export function CreateAnswer(offer)
 		}
 		
 		Client.setRemoteDescription(offer);
-		Client.createAnswer().then(answer => Client.setLocalDescription(answer));
+		
+		//ini yang nanti dikirim buat answer
+		Client.createAnswer().then(answer => 
+		{
+			Client.setLocalDescription(answer);
+			console.log(JSON.stringify(answer) + " INI YANG ASLI");
+		});
 	}
-	else
-	{
-		Client.addIceCandidate(offer);
-	}
+}
+
+export function SendMessage(data)
+{
+	dataChannel.send(data);
+}
+
+export function AddIceCandidate(data)
+{
+	Client.addIceCandidate(offer);
 }

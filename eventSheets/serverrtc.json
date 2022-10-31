@@ -47,6 +47,53 @@
 					"sid": 341118072317534
 				}
 			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 565270749138978,
+					"parameters": {
+						"key": 69
+					}
+				}
+			],
+			"actions": [],
+			"sid": 441774035637277,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "text",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 379633181927765
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 983271912070536,
+							"parameters": {
+								"variable": "text",
+								"value": "IceInput.Text"
+							}
+						},
+						{
+							"type": "script",
+							"script": "ServerRTC.SendMessage(JSON.parse(localVars.text));"
+						}
+					],
+					"sid": 680300247864104
+				}
+			]
 		}
 	],
 	"sid": 757634807057088

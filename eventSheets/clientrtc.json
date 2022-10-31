@@ -69,6 +69,53 @@
 			]
 		},
 		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 774302622379716,
+					"parameters": {
+						"key": 68
+					}
+				}
+			],
+			"actions": [],
+			"sid": 387077451780445,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "text",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 648766233671515
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 629929528578973,
+							"parameters": {
+								"variable": "text",
+								"value": "IceInput.Text"
+							}
+						},
+						{
+							"type": "script",
+							"script": "ClientRTC.SendMessage(JSON.parse(localVars.text));"
+						}
+					],
+					"sid": 684787012943919
+				}
+			]
+		},
+		{
 			"functionName": "SignalIceCandidate",
 			"functionDescription": "",
 			"functionCategory": "",
