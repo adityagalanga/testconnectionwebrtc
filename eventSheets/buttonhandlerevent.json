@@ -1,0 +1,213 @@
+{
+	"name": "ButtonHandlerEvent",
+	"events": [
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Button",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-touched-object",
+							"objectClass": "Touch",
+							"sid": 705873352674537,
+							"parameters": {
+								"object": "InputButton"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 326324205456212,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "InputButton",
+									"sid": 210189077977320,
+									"parameters": {
+										"instance-variable": "use_release"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-instvar-value",
+									"objectClass": "InputButton",
+									"sid": 987862073877237,
+									"parameters": {
+										"instance-variable": "touch_id",
+										"value": "Touch.TouchID"
+									}
+								},
+								{
+									"id": "set-animation",
+									"objectClass": "InputButton",
+									"sid": 446438074551994,
+									"parameters": {
+										"animation": "\"hit\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 446729260022870
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 410757836809026
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "InputButton",
+									"sid": 749150481271540,
+									"parameters": {
+										"animation": "\"hit\"",
+										"from": "beginning"
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 542753656459800,
+									"parameters": {
+										"seconds": "0.1"
+									}
+								},
+								{
+									"id": "set-animation",
+									"objectClass": "InputButton",
+									"sid": 107194859812325,
+									"parameters": {
+										"animation": "\"idle\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 126290184574280
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "RequestData",
+									"sid": 830198327914488,
+									"parameters": {
+										"unique-id": "Functions.CreateRequest"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "RequestChangeInput",
+									"sid": 355726719069066,
+									"parameters": [
+										"InputButton.input_name",
+										"\"down\""
+									]
+								},
+								{
+									"callFunction": "SendMessageSocket",
+									"sid": 708683235116766
+								}
+							],
+							"sid": 702717507031010
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-any-touch-end",
+							"objectClass": "Touch",
+							"sid": 882383320337781
+						}
+					],
+					"actions": [],
+					"sid": 189667544429176,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 916836271477941,
+									"parameters": {
+										"object": "InputButton",
+										"expression": "InputButton.use_release & InputButton.touch_id = Touch.TouchID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-instvar-value",
+									"objectClass": "InputButton",
+									"sid": 308373606221823,
+									"parameters": {
+										"instance-variable": "touch_id",
+										"value": "0"
+									}
+								},
+								{
+									"id": "set-animation",
+									"objectClass": "InputButton",
+									"sid": 426883306477576,
+									"parameters": {
+										"animation": "\"idle\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 598613196541802,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-unique-id",
+											"objectClass": "RequestData",
+											"sid": 730526119321519,
+											"parameters": {
+												"unique-id": "Functions.CreateRequest"
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "RequestChangeInput",
+											"sid": 450744163587836,
+											"parameters": [
+												"InputButton.input_name",
+												"\"up\""
+											]
+										},
+										{
+											"callFunction": "SendMessageSocket",
+											"sid": 844899400311315
+										}
+									],
+									"sid": 638694942523089
+								}
+							]
+						}
+					]
+				}
+			],
+			"sid": 408915979803666
+		}
+	],
+	"sid": 751701659673213
+}

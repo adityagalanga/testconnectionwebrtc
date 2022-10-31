@@ -1,0 +1,296 @@
+{
+	"name": "RequestDataEvent",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "PathToType",
+			"type": "string",
+			"initialValue": "type",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 916422452916853
+		},
+		{
+			"eventType": "variable",
+			"name": "PathToInput",
+			"type": "string",
+			"initialValue": "data.input",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 995928762798755
+		},
+		{
+			"eventType": "variable",
+			"name": "PathToContent",
+			"type": "string",
+			"initialValue": "data.content",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 418997564330329
+		},
+		{
+			"eventType": "variable",
+			"name": "PathToCondition",
+			"type": "string",
+			"initialValue": "data.condition",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 593145045958891
+		},
+		{
+			"functionName": "CreateRequest",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "number",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "create-object",
+					"objectClass": "System",
+					"sid": 784911659383310,
+					"parameters": {
+						"object-to-create": "RequestData",
+						"layer": "0",
+						"x": "0",
+						"y": "0",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "set-value",
+					"objectClass": "RequestData",
+					"sid": 498491947718374,
+					"parameters": {
+						"path": "PathToType",
+						"value": "\"3001\""
+					}
+				},
+				{
+					"id": "set-value",
+					"objectClass": "RequestData",
+					"sid": 644122527141334,
+					"parameters": {
+						"path": "PathToInput",
+						"value": "\"\""
+					}
+				},
+				{
+					"id": "set-object",
+					"objectClass": "RequestData",
+					"sid": 635307139126836,
+					"parameters": {
+						"path": "PathToContent"
+					}
+				},
+				{
+					"id": "set-function-return-value",
+					"objectClass": "Functions",
+					"sid": 156447913057400,
+					"parameters": {
+						"value": "RequestData.UID"
+					}
+				}
+			],
+			"sid": 518658152205159
+		},
+		{
+			"functionName": "CreateEmptyRequest",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "number",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "create-object",
+					"objectClass": "System",
+					"sid": 509120424155598,
+					"parameters": {
+						"object-to-create": "RequestData",
+						"layer": "0",
+						"x": "0",
+						"y": "0",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "set-function-return-value",
+					"objectClass": "Functions",
+					"sid": 967685152948254,
+					"parameters": {
+						"value": "RequestData.UID"
+					}
+				}
+			],
+			"sid": 741930366816926
+		},
+		{
+			"functionName": "RequestChangeType",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "none",
+			"functionCopyPicked": true,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "TypeValue",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 531204157328170
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-value",
+					"objectClass": "RequestData",
+					"sid": 765892495406571,
+					"parameters": {
+						"path": "PathToType",
+						"value": "TypeValue"
+					}
+				}
+			],
+			"sid": 186286866247555
+		},
+		{
+			"functionName": "RequestChangeInput",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "none",
+			"functionCopyPicked": true,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "InputValue",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 407693372463079
+				},
+				{
+					"name": "Condition",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 140780003306106
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-value",
+					"objectClass": "RequestData",
+					"sid": 699619877151243,
+					"parameters": {
+						"path": "PathToInput",
+						"value": "InputValue"
+					}
+				},
+				{
+					"id": "set-value",
+					"objectClass": "RequestData",
+					"sid": 214056084181328,
+					"parameters": {
+						"path": "PathToCondition",
+						"value": "Condition"
+					}
+				}
+			],
+			"sid": 147710416139642
+		},
+		{
+			"functionName": "RequestAddContentNumber",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "none",
+			"functionCopyPicked": true,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "ContentName",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 549425137187664
+				},
+				{
+					"name": "ContentValue",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 167822344428241
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-value",
+					"objectClass": "RequestData",
+					"sid": 898749815327717,
+					"parameters": {
+						"path": "PathToContent &\".\"& ContentName",
+						"value": "ContentValue"
+					}
+				}
+			],
+			"sid": 504365363354339
+		},
+		{
+			"functionName": "RequestAddContentString",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "none",
+			"functionCopyPicked": true,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "ContentName",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 690219533482538
+				},
+				{
+					"name": "ContentValue",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 477338489198504
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-value",
+					"objectClass": "RequestData",
+					"sid": 526382535600069,
+					"parameters": {
+						"path": "PathToContent &\".\"&ContentName",
+						"value": "ContentValue"
+					}
+				}
+			],
+			"sid": 687068898647914
+		}
+	],
+	"sid": 432333001511647
+}

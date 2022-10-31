@@ -1,0 +1,349 @@
+{
+	"name": "ExampleShakeEvent",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "WebSocketEvent"
+		},
+		{
+			"eventType": "variable",
+			"name": "Shake_LastTimeShake",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 537284414077447
+		},
+		{
+			"eventType": "variable",
+			"name": "Shake_HIT",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 590727620968262
+		},
+		{
+			"eventType": "variable",
+			"name": "Shake_LastAccel",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 659199925002646
+		},
+		{
+			"eventType": "variable",
+			"name": "Shake_CurrentAccel",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 493169071328327
+		},
+		{
+			"eventType": "variable",
+			"name": "Shake_Accel",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 383753631954943
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 385698085747623
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 436518901721544,
+					"parameters": {
+						"variable": "HoldMessage",
+						"value": "false"
+					}
+				}
+			],
+			"sid": 859058786314620
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "MenuButton",
+					"sid": 253709788939222
+				}
+			],
+			"actions": [
+				{
+					"id": "go-to-layout-by-name",
+					"objectClass": "System",
+					"sid": 538556546802512,
+					"parameters": {
+						"layout": "MenuButton.direct"
+					}
+				}
+			],
+			"sid": 693108840701320
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Shake",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "every-tick",
+							"objectClass": "System",
+							"sid": 716219318359885
+						}
+					],
+					"actions": [],
+					"sid": 142308578960129,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "x",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 871097691135784
+						},
+						{
+							"eventType": "variable",
+							"name": "y",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 719370667377727
+						},
+						{
+							"eventType": "variable",
+							"name": "z",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 905788573012203
+						},
+						{
+							"eventType": "variable",
+							"name": "delta",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 787593576664737
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 908170128926659,
+									"parameters": {
+										"variable": "x",
+										"value": "Touch.AccelerationXWithG"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 450604459718686,
+									"parameters": {
+										"variable": "y",
+										"value": "Touch.AccelerationYWithG"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 777085478478097,
+									"parameters": {
+										"variable": "z",
+										"value": "Touch.AccelerationZWithG"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 948720020093061,
+									"parameters": {
+										"variable": "Shake_LastAccel",
+										"value": "Shake_CurrentAccel"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 671868932134895,
+									"parameters": {
+										"variable": "Shake_CurrentAccel",
+										"value": "float(sqrt((x*x) + (y*y) + (z*z)))"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 847016969969155,
+									"parameters": {
+										"variable": "delta",
+										"value": "float(Shake_CurrentAccel-Shake_LastAccel)"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 176837819277904,
+									"parameters": {
+										"variable": "Shake_Accel",
+										"value": "Shake_Accel * 0.9 +delta"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "Text",
+									"sid": 245773239944754,
+									"parameters": {
+										"text": "Shake_Accel"
+									}
+								}
+							],
+							"sid": 682077802850439,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 172665022231165,
+											"parameters": {
+												"first-value": "Shake_Accel",
+												"comparison": 4,
+												"second-value": "12"
+											}
+										},
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 705567405318203,
+											"parameters": {
+												"first-value": "Shake_LastTimeShake + 0.15",
+												"comparison": 3,
+												"second-value": "time"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "log",
+											"objectClass": "Browser",
+											"sid": 125564097011153,
+											"parameters": {
+												"type": "log",
+												"message": "Shake_Accel & newline & \n\"Time : \" & time"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 910946504799944,
+											"parameters": {
+												"variable": "Shake_Accel",
+												"value": "0"
+											}
+										},
+										{
+											"id": "add-to-eventvar",
+											"objectClass": "System",
+											"sid": 764102883358545,
+											"parameters": {
+												"variable": "Shake_HIT",
+												"value": "1"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 797046454338520,
+											"parameters": {
+												"variable": "Shake_LastTimeShake",
+												"value": "time"
+											}
+										},
+										{
+											"id": "set-text",
+											"objectClass": "ShakeText",
+											"sid": 588033575042012,
+											"parameters": {
+												"text": "Shake_HIT"
+											}
+										}
+									],
+									"sid": 769982039603043,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-unique-id",
+													"objectClass": "RequestData",
+													"sid": 113975611141931,
+													"parameters": {
+														"unique-id": "Functions.CreateRequest"
+													}
+												}
+											],
+											"actions": [
+												{
+													"callFunction": "RequestChangeInput",
+													"sid": 279584241590239,
+													"parameters": [
+														"\"shake\"",
+														"\"down\""
+													]
+												},
+												{
+													"callFunction": "SendMessageSocket",
+													"sid": 286154715497146
+												}
+											],
+											"sid": 965299605742370
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			],
+			"sid": 808895292633052
+		}
+	],
+	"sid": 671177714615744
+}

@@ -1,0 +1,57 @@
+{
+	"name": "ExampleDpadEvent",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "WebSocketEvent"
+		},
+		{
+			"eventType": "include",
+			"includeSheet": "ButtonHandlerEvent"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 428897857106858
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 663195130578517,
+					"parameters": {
+						"variable": "HoldMessage",
+						"value": "false"
+					}
+				}
+			],
+			"sid": 436857571278110
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "MenuButton",
+					"sid": 368414231109626
+				}
+			],
+			"actions": [
+				{
+					"id": "go-to-layout-by-name",
+					"objectClass": "System",
+					"sid": 874479110358155,
+					"parameters": {
+						"layout": "MenuButton.direct"
+					}
+				}
+			],
+			"sid": 382310766301593
+		}
+	],
+	"sid": 188501290528885
+}

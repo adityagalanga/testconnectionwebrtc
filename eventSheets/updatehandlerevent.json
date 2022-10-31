@@ -1,0 +1,95 @@
+{
+	"name": "UpdateHandlerEvent",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "WebSocketEvent"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 836574699627270
+				}
+			],
+			"actions": [
+				{
+					"type": "comment",
+					"text": "init localization"
+				},
+				{
+					"callFunction": "InitLanguage",
+					"sid": 427887614055969
+				},
+				{
+					"id": "wait-for-previous-actions",
+					"objectClass": "System",
+					"sid": 362143420217940
+				},
+				{
+					"id": "set-text",
+					"objectClass": "UpdateText",
+					"sid": 560610679738079,
+					"parameters": {
+						"text": "Functions.GetLanguage(\"load_assets\")"
+					}
+				},
+				{
+					"type": "comment",
+					"text": "init"
+				},
+				{
+					"callFunction": "ShowGameVersion",
+					"sid": 680617155532435
+				}
+			],
+			"sid": 600950272827694,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-wake-lock-supported",
+							"objectClass": "PlatformInfo",
+							"sid": 535309314976476
+						}
+					],
+					"actions": [
+						{
+							"id": "request-wake-lock",
+							"objectClass": "PlatformInfo",
+							"sid": 469206743730792
+						}
+					],
+					"sid": 825615355357996
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 105133053339862,
+							"parameters": {
+								"type": "log",
+								"message": "\"Trying Connect To Server\""
+							}
+						},
+						{
+							"callFunction": "ConnectSocket",
+							"sid": 431414116180995,
+							"parameters": [
+								true
+							]
+						}
+					],
+					"sid": 717525545691278
+				}
+			]
+		}
+	],
+	"sid": 481130606901373
+}

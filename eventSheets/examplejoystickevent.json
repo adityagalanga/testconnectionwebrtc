@@ -1,0 +1,477 @@
+{
+	"name": "ExampleJoystickEvent",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "WebSocketEvent"
+		},
+		{
+			"eventType": "include",
+			"includeSheet": "ButtonHandlerEvent"
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Joystick",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "touchID",
+					"type": "number",
+					"initialValue": "-1",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 112191462467791
+				},
+				{
+					"eventType": "variable",
+					"name": "dist",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 609630662760293
+				},
+				{
+					"eventType": "variable",
+					"name": "cangle",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 885335019640900
+				},
+				{
+					"eventType": "variable",
+					"name": "radius",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 888277824606134
+				},
+				{
+					"eventType": "variable",
+					"name": "SendEveryTick",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": true,
+					"sid": 326803499903634
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-start-of-layout",
+							"objectClass": "System",
+							"sid": 499740694311355
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 979917684224161,
+							"parameters": {
+								"variable": "HoldMessage",
+								"value": "false"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 299104958171323,
+							"parameters": {
+								"variable": "radius",
+								"value": "joystickPad.Width / 2"
+							}
+						},
+						{
+							"id": "set-position-to-another-object",
+							"objectClass": "joystickStick",
+							"sid": 763786880444655,
+							"parameters": {
+								"object": "joystickPad",
+								"image-point-optional": "0"
+							}
+						}
+					],
+					"sid": 424526023604225
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-touched-object",
+							"objectClass": "Touch",
+							"sid": 896241454943860,
+							"parameters": {
+								"object": "joystickPad"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 663098294457949,
+							"parameters": {
+								"variable": "touchID",
+								"value": "touch.TouchID"
+							}
+						}
+					],
+					"sid": 220530467709179
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 412490117354545,
+							"parameters": {
+								"variable": "touchID",
+								"comparison": 5,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 745216115287694,
+							"parameters": {
+								"variable": "dist",
+								"value": "distance(joystickPad.X, joystickPad.Y,\r\nTouch.XForID(touchID), \r\nTouch.YForID(touchID ))"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 588631544180272,
+							"parameters": {
+								"variable": "cangle",
+								"value": "angle(joystickPad.X, joystickPad.Y,\r\nTouch.XForID(touchID), \r\nTouch.YForID(touchID ))"
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "joystickStick",
+							"sid": 296393647907390,
+							"parameters": {
+								"x": "(cos(cangle) * (dist < radius ? dist :  radius)) + joystickPad.X",
+								"y": "(sin(cangle) * (dist < radius ? dist : radius)) + joystickPad.Y"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "joystickStick",
+							"sid": 684280615193599,
+							"parameters": {
+								"instance-variable": "conAngle",
+								"value": "cangle"
+							}
+						}
+					],
+					"sid": 427556622991927,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "curXP",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 875470278616551
+						},
+						{
+							"eventType": "variable",
+							"name": "curYP",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 598740810001459
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 306364847097225,
+									"parameters": {
+										"variable": "curXP",
+										"value": "roundToDp(((joystickStick.X - joystickPad.X )  / radius),1)"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 809853197394297,
+									"parameters": {
+										"variable": "curYP",
+										"value": "roundToDp((( joystickPad.Y - joystickStick.Y)  / radius),1)"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "joystickInfo",
+									"sid": 464632603854078,
+									"parameters": {
+										"text": "\"Current X : \" & curXP & \" Current Y : \" & curYP"
+									}
+								}
+							],
+							"sid": 628236071936328,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 776283934551673,
+											"parameters": {
+												"first-value": "joystickStick.XP",
+												"comparison": 1,
+												"second-value": "curXP"
+											}
+										},
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 721954233457254,
+											"parameters": {
+												"first-value": "joystickStick.YP",
+												"comparison": 1,
+												"second-value": "curYP"
+											}
+										},
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 984326740991394,
+											"parameters": {
+												"variable": "SendEveryTick"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-instvar-value",
+											"objectClass": "joystickStick",
+											"sid": 727402528576101,
+											"parameters": {
+												"instance-variable": "XP",
+												"value": "curXP"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "joystickStick",
+											"sid": 811609034078495,
+											"parameters": {
+												"instance-variable": "YP",
+												"value": "curYP"
+											}
+										}
+									],
+									"sid": 262894041737031,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-unique-id",
+													"objectClass": "RequestData",
+													"sid": 123892275080572,
+													"parameters": {
+														"unique-id": "Functions.CreateRequest"
+													}
+												}
+											],
+											"actions": [
+												{
+													"callFunction": "RequestChangeInput",
+													"sid": 106149651892480,
+													"parameters": [
+														"\"joystick\"",
+														"\"down\""
+													]
+												},
+												{
+													"callFunction": "RequestAddContentNumber",
+													"sid": 962915653759813,
+													"parameters": [
+														"\"x\"",
+														"curXP"
+													]
+												},
+												{
+													"callFunction": "RequestAddContentNumber",
+													"sid": 281935461733051,
+													"parameters": [
+														"\"y\"",
+														"curYP"
+													]
+												},
+												{
+													"callFunction": "SendMessageSocket",
+													"sid": 654697614330600
+												}
+											],
+											"sid": 991250428454291
+										}
+									],
+									"isOrBlock": true
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-any-touch-end",
+							"objectClass": "Touch",
+							"sid": 735480924306977
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 286339617296643,
+							"parameters": {
+								"variable": "touchID",
+								"comparison": 0,
+								"value": "touch.TouchID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-position-to-another-object",
+							"objectClass": "joystickStick",
+							"sid": 387697104565803,
+							"parameters": {
+								"object": "joystickPad",
+								"image-point-optional": "0"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "joystickStick",
+							"sid": 613098630084533,
+							"parameters": {
+								"instance-variable": "XP",
+								"value": "0"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "joystickStick",
+							"sid": 623713227625839,
+							"parameters": {
+								"instance-variable": "YP",
+								"value": "0"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 858952524463953,
+							"parameters": {
+								"variable": "touchID",
+								"value": "-1"
+							}
+						}
+					],
+					"sid": 965155800727671,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "RequestData",
+									"sid": 450922644879654,
+									"parameters": {
+										"unique-id": "Functions.CreateRequest"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "RequestChangeInput",
+									"sid": 427935275198977,
+									"parameters": [
+										"\"joystick\"",
+										"\"up\""
+									]
+								},
+								{
+									"callFunction": "RequestAddContentNumber",
+									"sid": 612847427876733,
+									"parameters": [
+										"\"x\"",
+										"0"
+									]
+								},
+								{
+									"callFunction": "RequestAddContentNumber",
+									"sid": 824085230785359,
+									"parameters": [
+										"\"y\"",
+										"0"
+									]
+								},
+								{
+									"callFunction": "SendMessageSocket",
+									"sid": 939211792755054
+								}
+							],
+							"sid": 847595629407165
+						}
+					]
+				}
+			],
+			"sid": 706954159292958
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "MenuButton",
+					"sid": 439499400003334
+				}
+			],
+			"actions": [
+				{
+					"id": "go-to-layout-by-name",
+					"objectClass": "System",
+					"sid": 577898240048925,
+					"parameters": {
+						"layout": "MenuButton.direct"
+					}
+				}
+			],
+			"sid": 479402597482164
+		}
+	],
+	"sid": 828185719936855
+}

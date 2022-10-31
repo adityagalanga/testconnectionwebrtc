@@ -1,0 +1,50 @@
+{
+	"name": "GlobalEvent",
+	"events": [
+		{
+			"functionName": "ShowGameVersion",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-text",
+					"objectClass": "VERSIONTEXT",
+					"sid": 311016932878272,
+					"parameters": {
+						"text": "\"Version \" & projectversion"
+					}
+				}
+			],
+			"sid": 380237906396003
+		},
+		{
+			"functionName": "ShowFPS",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-text",
+					"objectClass": "FPSTEXT",
+					"sid": 335160011655038,
+					"parameters": {
+						"text": "fps & \" FPS, \" & round(cpuutilisation * 100) & \"% CPU, \" & round(gpuutilisation * 100) & \"% GPU\""
+					}
+				}
+			],
+			"sid": 821506515901704
+		}
+	],
+	"sid": 958568876719377
+}

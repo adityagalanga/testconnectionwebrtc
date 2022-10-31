@@ -1,0 +1,255 @@
+{
+	"name": "AudioEvent",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "BGM_SOUND",
+			"type": "number",
+			"initialValue": "50",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 797919236419287
+		},
+		{
+			"eventType": "variable",
+			"name": "SFX_SOUND",
+			"type": "number",
+			"initialValue": "100",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 299278693671963
+		},
+		{
+			"functionName": "PlayBGM",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "sound_name",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 513045722734218
+				},
+				{
+					"name": "StopOtherBGM",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"sid": 158711861274557
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 718810530319085,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 816288140510589,
+							"parameters": {
+								"variable": "StopOtherBGM"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "StopBGM",
+							"sid": 620247769223618
+						}
+					],
+					"sid": 114813767917793
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "play-by-name",
+							"objectClass": "Audio",
+							"sid": 465432480576355,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "sound_name",
+								"loop": "looping",
+								"volume": "BGM_SOUND",
+								"tag-optional": "\"BGM\""
+							}
+						}
+					],
+					"sid": 939462045920625
+				}
+			]
+		},
+		{
+			"functionName": "PlaySFX",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "sound_name",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 980444480584210
+				},
+				{
+					"name": "alias_name",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 925253713717772
+				},
+				{
+					"name": "CheckDuplicate",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"sid": 234723827706043
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 379775913091708,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 155188186749913,
+							"parameters": {
+								"variable": "CheckDuplicate"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 104073981507325,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-tag-playing",
+									"objectClass": "Audio",
+									"sid": 263868282302078,
+									"parameters": {
+										"tag": "alias_name =\"\" ?  sound_name : alias_name"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "play-by-name",
+									"objectClass": "Audio",
+									"sid": 540692848252100,
+									"parameters": {
+										"folder": "sounds",
+										"audio-file-name": "sound_name",
+										"loop": "not-looping",
+										"volume": "SFX_SOUND",
+										"tag-optional": "alias_name =\"\" ?  sound_name : alias_name"
+									}
+								}
+							],
+							"sid": 664737687504087
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 220671758499859
+						}
+					],
+					"actions": [
+						{
+							"id": "play-by-name",
+							"objectClass": "Audio",
+							"sid": 768411576819196,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "sound_name",
+								"loop": "not-looping",
+								"volume": "SFX_SOUND",
+								"tag-optional": "alias_name =\"\" ?  sound_name : alias_name"
+							}
+						}
+					],
+					"sid": 365249165651159
+				}
+			]
+		},
+		{
+			"functionName": "StopBGM",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "stop",
+					"objectClass": "Audio",
+					"sid": 259196952766106,
+					"parameters": {
+						"tag": "\"BGM\""
+					}
+				}
+			],
+			"sid": 108221107790032
+		},
+		{
+			"functionName": "StopSound",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "sound_name",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 790041111528557
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "stop",
+					"objectClass": "Audio",
+					"sid": 278105018414175,
+					"parameters": {
+						"tag": "sound_name"
+					}
+				}
+			],
+			"sid": 940284451271043
+		}
+	],
+	"sid": 585127192427475
+}

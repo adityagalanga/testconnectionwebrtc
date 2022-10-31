@@ -1,0 +1,82 @@
+{
+	"name": "MainMenuEvent",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "WebSocketEvent"
+		},
+		{
+			"eventType": "include",
+			"includeSheet": "ClientRTC"
+		},
+		{
+			"eventType": "include",
+			"includeSheet": "ServerRTC"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 552687171648991
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "ShowFPS",
+					"sid": 910348410820945
+				}
+			],
+			"sid": 615341773515249
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 196012172720443
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "ShowGameVersion",
+					"sid": 293738109283969
+				},
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 561769833288616,
+					"parameters": {
+						"variable": "HoldMessage",
+						"value": "false"
+					}
+				}
+			],
+			"sid": 984779849097517
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "MenuButton",
+					"sid": 636579534428404
+				}
+			],
+			"actions": [
+				{
+					"id": "go-to-layout-by-name",
+					"objectClass": "System",
+					"sid": 800333496613854,
+					"parameters": {
+						"layout": "MenuButton.direct"
+					}
+				}
+			],
+			"sid": 233815402217230
+		}
+	],
+	"sid": 494991316765729
+}

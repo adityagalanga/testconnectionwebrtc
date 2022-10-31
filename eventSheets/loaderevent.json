@@ -1,0 +1,248 @@
+{
+	"name": "LoaderEvent",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "IsLoaderComplete",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 509196456550816
+		},
+		{
+			"eventType": "variable",
+			"name": "FadeInSplash",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 639752106045686
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 145437221494042
+				}
+			],
+			"actions": [
+				{
+					"id": "play-timeline",
+					"objectClass": "TimeLine",
+					"sid": 227712670166207,
+					"parameters": {
+						"timeline": "SplashFadeIN",
+						"tags": "\"In\""
+					}
+				},
+				{
+					"type": "comment",
+					"text": "Set screen orientation potrait or landscape"
+				},
+				{
+					"id": "execute-javascript",
+					"objectClass": "Browser",
+					"sid": 708548733575037,
+					"disabled": true,
+					"parameters": {
+						"javascript": "\"parent.lockOrientation('landscape');\""
+					}
+				},
+				{
+					"id": "execute-javascript",
+					"objectClass": "Browser",
+					"sid": 841893919680742,
+					"disabled": true,
+					"parameters": {
+						"javascript": "\"parent.lockOrientation('potrait');\""
+					}
+				}
+			],
+			"sid": 878370291753974
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 989444927932425
+				}
+			],
+			"actions": [
+				{
+					"id": "set-width",
+					"objectClass": "LoadingBar",
+					"sid": 257104993197715,
+					"parameters": {
+						"width": "round(loadingprogress*1164)"
+					}
+				}
+			],
+			"sid": 510555785845952,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 818926548940515,
+							"parameters": {
+								"variable": "IsLoaderComplete"
+							}
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 722764251675052,
+							"parameters": {
+								"variable": "FadeInSplash"
+							}
+						},
+						{
+							"id": "is-playing-by-tags",
+							"objectClass": "TimeLine",
+							"sid": 728475892797380,
+							"parameters": {
+								"tags": "\"Out\""
+							},
+							"isInverted": true
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 443127370726110
+						}
+					],
+					"actions": [
+						{
+							"id": "play-timeline",
+							"objectClass": "TimeLine",
+							"sid": 239077406987452,
+							"parameters": {
+								"timeline": "SplashFadeOut",
+								"tags": "\"Out\""
+							}
+						},
+						{
+							"id": "set-layer-visible",
+							"objectClass": "System",
+							"sid": 101519129580949,
+							"parameters": {
+								"layer": "\"Loading\"",
+								"visibility": "invisible"
+							}
+						}
+					],
+					"sid": 828637132634306
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-loader-layout-complete",
+					"objectClass": "System",
+					"sid": 570181296288442
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 248469720224325,
+					"parameters": {
+						"variable": "IsLoaderComplete",
+						"value": "true"
+					}
+				}
+			],
+			"sid": 304281413157661
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timeline-finished-by-tags",
+					"objectClass": "TimeLine",
+					"sid": 938421906136366,
+					"parameters": {
+						"tags": "\"In\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 803638317124998,
+					"parameters": {
+						"variable": "FadeInSplash",
+						"value": "true"
+					}
+				}
+			],
+			"sid": 808020766660955,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 786907084751394,
+							"parameters": {
+								"variable": "IsLoaderComplete"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-layer-visible",
+							"objectClass": "System",
+							"sid": 363570579675060,
+							"parameters": {
+								"layer": "\"Loading\"",
+								"visibility": "visible"
+							}
+						}
+					],
+					"sid": 179494024246450
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timeline-finished-by-tags",
+					"objectClass": "TimeLine",
+					"sid": 252492709956529,
+					"parameters": {
+						"tags": "\"Out\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "go-to-layout",
+					"objectClass": "System",
+					"sid": 758124629518844,
+					"parameters": {
+						"layout": "UpdateHandlerLayout"
+					}
+				}
+			],
+			"sid": 657413579721539
+		}
+	],
+	"sid": 926360490170568
+}

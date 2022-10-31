@@ -1,0 +1,76 @@
+{
+	"name": "joystickStick",
+	"plugin-id": "Sprite",
+	"sid": 455860593996822,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "XP",
+			"type": "number",
+			"desc": "",
+			"sid": 676206316070254
+		},
+		{
+			"name": "YP",
+			"type": "number",
+			"desc": "",
+			"sid": 521733285789215
+		},
+		{
+			"name": "conAngle",
+			"type": "number",
+			"desc": "",
+			"sid": 471314560936805
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 64,
+						"height": 64,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"imageSpriteId": 8111053,
+						"collisionPoly": {
+							"points": [
+								0.181818,
+								0.181818,
+								0.5,
+								0.0151515,
+								0.818182,
+								0.181818,
+								0.984848,
+								0.5,
+								0.818182,
+								0.818182,
+								0.5,
+								0.984848,
+								0.181818,
+								0.818182,
+								0.0151515,
+								0.5
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 397037367686029,
+				"name": "Default",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

@@ -1,0 +1,53 @@
+{
+	"name": "ServerRTC",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 264730759105321,
+					"parameters": {
+						"key": 81
+					}
+				}
+			],
+			"actions": [],
+			"sid": 113448412024415,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "text",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 587461457234202
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 816165039954395,
+							"parameters": {
+								"variable": "text",
+								"value": "IceInput.Text"
+							}
+						},
+						{
+							"type": "script",
+							"script": "ServerRTC.CreateAnswer(JSON.parse(localVars.text));"
+						}
+					],
+					"sid": 341118072317534
+				}
+			]
+		}
+	],
+	"sid": 757634807057088
+}

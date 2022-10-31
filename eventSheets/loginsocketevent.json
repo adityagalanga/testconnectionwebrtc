@@ -1,0 +1,67 @@
+{
+	"name": "LoginSocketEvent",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "WebSocketEvent"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "ButtonConnectSocket",
+					"sid": 745996259071887
+				}
+			],
+			"actions": [],
+			"sid": 736658147462235,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 194439713604127,
+							"parameters": {
+								"first-value": "TextInput.Text",
+								"comparison": 1,
+								"second-value": "\"\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 919551174675745,
+							"parameters": {
+								"variable": "NAME_PARAM",
+								"value": "\"/\"&TextInput.Text"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 307020955193930,
+							"parameters": {
+								"variable": "PLAYER_NAME",
+								"value": "TextInput.Text"
+							}
+						},
+						{
+							"callFunction": "ConnectSocket",
+							"sid": 491526993007848,
+							"parameters": [
+								false
+							]
+						}
+					],
+					"sid": 442094888732127
+				}
+			]
+		}
+	],
+	"sid": 885116712800425
+}

@@ -1,0 +1,104 @@
+{
+	"name": "ClientRTC",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 201413889860843,
+					"parameters": {
+						"key": 65
+					}
+				}
+			],
+			"actions": [
+				{
+					"type": "script",
+					"script": "ClientRTC.CreateOffer();"
+				}
+			],
+			"sid": 404631631809797
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 415919987583452,
+					"parameters": {
+						"key": 83
+					}
+				}
+			],
+			"actions": [],
+			"sid": 904987649089927,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "text",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 841793696947654
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 104206766956350,
+							"parameters": {
+								"variable": "text",
+								"value": "IceInput.Text"
+							}
+						},
+						{
+							"type": "script",
+							"script": "ClientRTC.SetRemoteDescription(JSON.parse(localVars.text));"
+						}
+					],
+					"sid": 769980330721689
+				}
+			]
+		},
+		{
+			"functionName": "SignalIceCandidate",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "icecandidate",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 543930190401969
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 617978228426814,
+					"parameters": {
+						"type": "log",
+						"message": "icecandidate"
+					}
+				}
+			],
+			"sid": 202360865446573
+		}
+	],
+	"sid": 594897742848356
+}

@@ -1,0 +1,30 @@
+{
+	"name": "InputButton",
+	"plugin-id": "Sprite",
+	"sid": 168092074750469,
+	"instanceVariables": [
+		{
+			"name": "input_name",
+			"type": "string",
+			"desc": "",
+			"sid": 864850829969972
+		},
+		{
+			"name": "use_release",
+			"type": "boolean",
+			"desc": "",
+			"sid": 709996244343655
+		},
+		{
+			"name": "touch_id",
+			"type": "number",
+			"desc": "",
+			"sid": 146665553360358
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"buttonGame"
+	]
+}

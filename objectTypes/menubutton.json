@@ -1,0 +1,15 @@
+{
+	"name": "MenuButton",
+	"plugin-id": "Button",
+	"sid": 828420895912518,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "direct",
+			"type": "string",
+			"desc": "",
+			"sid": 782270341744680
+		}
+	],
+	"behaviorTypes": []
+}

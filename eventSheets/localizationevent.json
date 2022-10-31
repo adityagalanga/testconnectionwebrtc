@@ -1,0 +1,330 @@
+{
+	"name": "LocalizationEvent",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "DEFAULT_LANGUAGE",
+			"type": "string",
+			"initialValue": "id",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 199308042068257
+		},
+		{
+			"eventType": "variable",
+			"name": "CurrentLanguage",
+			"type": "string",
+			"initialValue": "",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 217918105802326
+		},
+		{
+			"functionName": "InitLanguage",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": true,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 366890059491553,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 518610543873547,
+							"parameters": {
+								"first-value": "CurrentLanguage",
+								"comparison": 0,
+								"second-value": "\"\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "request-project-file",
+							"objectClass": "AJAX",
+							"sid": 943147064208832,
+							"parameters": {
+								"tag": "\"localization\"",
+								"file": "localization.json"
+							}
+						},
+						{
+							"id": "wait-for-previous-actions",
+							"objectClass": "System",
+							"sid": 533443029478428
+						},
+						{
+							"id": "load",
+							"objectClass": "localization",
+							"sid": 810884634092360,
+							"parameters": {
+								"json": "AJAX.LastData"
+							}
+						}
+					],
+					"sid": 539619014806430,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 663693497136834,
+									"parameters": {
+										"first-value": "Browser.QueryParam(\"lang\")",
+										"comparison": 0,
+										"second-value": "\"id\""
+									}
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 185043877179473,
+									"parameters": {
+										"first-value": "Browser.QueryParam(\"lang\")",
+										"comparison": 0,
+										"second-value": "\"en\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 226230959584905,
+									"parameters": {
+										"variable": "CurrentLanguage",
+										"value": "Browser.QueryParam(\"lang\")"
+									}
+								}
+							],
+							"sid": 236688648826524,
+							"isOrBlock": true
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 356628954340625
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 422112224726626,
+									"parameters": {
+										"variable": "CurrentLanguage",
+										"value": "DEFAULT_LANGUAGE"
+									}
+								}
+							],
+							"sid": 384889958810869
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"callFunction": "UpdateLanguage",
+									"sid": 346285157892074
+								}
+							],
+							"sid": 135986116541644
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 280238480164155
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "UpdateLanguage",
+							"sid": 111156004932515
+						}
+					],
+					"sid": 912859159713331
+				}
+			]
+		},
+		{
+			"functionName": "UpdateLanguage",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 727818825896195,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 264118006415399,
+							"parameters": {
+								"object": "LangFam"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 208684967820925,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "LangFam",
+									"sid": 287888130602765,
+									"parameters": {
+										"instance-variable": "localization_key",
+										"comparison": 1,
+										"value": "\"\""
+									}
+								},
+								{
+									"id": "has-key",
+									"objectClass": "localization",
+									"sid": 697465125035336,
+									"parameters": {
+										"key": "CurrentLanguage&\"_\"& LangFam.localization_key"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-text",
+									"objectClass": "LangFam",
+									"sid": 276589023096000,
+									"parameters": {
+										"text": "localization.Get(CurrentLanguage&\"_\"&LangFam.localization_key)"
+									}
+								}
+							],
+							"sid": 577466702119108,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "set-text",
+											"objectClass": "LangFam",
+											"sid": 958078426435234,
+											"parameters": {
+												"text": "replace(LangFam.Text,\"<value1>\",LangFam.string1)"
+											}
+										},
+										{
+											"id": "set-text",
+											"objectClass": "LangFam",
+											"sid": 653974237021504,
+											"parameters": {
+												"text": "replace(LangFam.Text,\"<value2>\",LangFam.string2)"
+											}
+										}
+									],
+									"sid": 392143687149656
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"functionName": "GetLanguage",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "string",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "localization_key",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 479668292228306
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 106201415067520,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "has-key",
+							"objectClass": "localization",
+							"sid": 944257953089297,
+							"parameters": {
+								"key": "CurrentLanguage&\"_\"& localization_key"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 284838548189662,
+							"parameters": {
+								"value": "localization.Get(CurrentLanguage&\"_\"&localization_key)"
+							}
+						}
+					],
+					"sid": 707442482566628
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 810410174678495
+						}
+					],
+					"actions": [
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 104241241352347,
+							"parameters": {
+								"value": "\"\""
+							}
+						}
+					],
+					"sid": 187844213055515
+				}
+			]
+		}
+	],
+	"sid": 684672895841183
+}
