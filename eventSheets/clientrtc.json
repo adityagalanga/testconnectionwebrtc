@@ -145,6 +145,65 @@
 				}
 			],
 			"sid": 202360865446573
+		},
+		{
+			"functionName": "CreateOffer",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "offer",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 187036644091890
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 740416978476034,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "RequestData",
+							"sid": 815797926595717,
+							"parameters": {
+								"unique-id": "Functions.CreateRequest"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "RequestChangeInput",
+							"sid": 530430149348343,
+							"parameters": [
+								"\"Offer\"",
+								"\"down\""
+							]
+						},
+						{
+							"callFunction": "RequestAddContentString",
+							"sid": 471651539944496,
+							"parameters": [
+								"\"offer\"",
+								"offer"
+							]
+						},
+						{
+							"callFunction": "SendMessageSocket",
+							"sid": 110176234076147
+						}
+					],
+					"sid": 460490869830581
+				}
+			]
 		}
 	],
 	"sid": 594897742848356

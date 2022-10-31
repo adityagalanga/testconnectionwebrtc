@@ -94,6 +94,65 @@
 					"sid": 680300247864104
 				}
 			]
+		},
+		{
+			"functionName": "CreateAnswer",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "answer",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 684917408604030
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 385761085875118,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "RequestData",
+							"sid": 682571033093327,
+							"parameters": {
+								"unique-id": "Functions.CreateRequest"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "RequestChangeInput",
+							"sid": 303856403338329,
+							"parameters": [
+								"\"Answer\"",
+								"\"down\""
+							]
+						},
+						{
+							"callFunction": "RequestAddContentString",
+							"sid": 924721849662478,
+							"parameters": [
+								"\"answer\"",
+								"answer"
+							]
+						},
+						{
+							"callFunction": "SendMessageSocket",
+							"sid": 781846046460391
+						}
+					],
+					"sid": 793327460642260
+				}
+			]
 		}
 	],
 	"sid": 757634807057088

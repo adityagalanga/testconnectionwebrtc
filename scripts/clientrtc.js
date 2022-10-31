@@ -67,5 +67,5 @@ export function SendMessage(data)
 
 export function AddIceCandidate(data)
 {
-	Client.addIceCandidate(offer);
+	Server.addIceCandidate(offer);
 }
