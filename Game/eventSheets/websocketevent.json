@@ -35,7 +35,7 @@
 			"eventType": "variable",
 			"name": "GAMESOCKETID",
 			"type": "string",
-			"initialValue": "backbone",
+			"initialValue": "herdsman",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -217,15 +217,6 @@
 					"parameters": [
 						"WebSocket.MessageText"
 					]
-				},
-				{
-					"id": "log",
-					"objectClass": "Browser",
-					"sid": 283162809383820,
-					"parameters": {
-						"type": "log",
-						"message": "WebSocket.MessageText"
-					}
 				}
 			],
 			"sid": 593181293306762
@@ -543,7 +534,59 @@
 								}
 							],
 							"actions": [],
-							"sid": 491417869130898
+							"sid": 491417869130898,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-value",
+											"objectClass": "WebsocketMessage",
+											"sid": 869331901697106,
+											"parameters": {
+												"path": "\"data.input\"",
+												"cmp": 0,
+												"value": "\"offer\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "AcceptOffer",
+											"sid": 492185203899287,
+											"parameters": [
+												"WebsocketMessage.Get(\"data.content.offer\")"
+											]
+										}
+									],
+									"sid": 809918808872176
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-value",
+											"objectClass": "WebsocketMessage",
+											"sid": 604702113382158,
+											"parameters": {
+												"path": "\"data.input\"",
+												"cmp": 0,
+												"value": "\"candidate\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "AddCandidate",
+											"sid": 308246015851017,
+											"parameters": [
+												"WebsocketMessage.Get(\"data.content.candidate\")"
+											]
+										}
+									],
+									"sid": 734431532338935
+								}
+							]
 						}
 					]
 				}

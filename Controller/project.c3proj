@@ -147,7 +147,10 @@
 	"objectTypes": {
 		"items": [
 			"Text",
-			"IceInput"
+			"IceInput",
+			"ConnectWEBRTC",
+			"InfoWebRTCConnection",
+			"CheckData"
 		],
 		"subfolders": [
 			{
@@ -270,8 +273,7 @@
 		"items": [
 			"MainMenuEvent",
 			"LoginSocketEvent",
-			"ClientRTC",
-			"ServerRTC"
+			"ClientRTC"
 		],
 		"subfolders": [
 			{
@@ -314,14 +316,6 @@
 					"name": "ClientRTC.js",
 					"type": "application/javascript",
 					"sid": 987939529742660,
-					"script-info": {
-						"purpose": "none"
-					}
-				},
-				{
-					"name": "ServerRTC.js",
-					"type": "application/javascript",
-					"sid": 583802275309619,
 					"script-info": {
 						"purpose": "none"
 					}

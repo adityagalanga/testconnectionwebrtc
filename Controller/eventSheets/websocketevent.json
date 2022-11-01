@@ -15,7 +15,7 @@
 			"eventType": "variable",
 			"name": "GAMESOCKETID",
 			"type": "string",
-			"initialValue": "backbone",
+			"initialValue": "herdsman",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": true,
@@ -465,17 +465,90 @@
 			],
 			"actions": [
 				{
-					"id": "push",
-					"objectClass": "CurrentMessageData",
-					"sid": 552101405545655,
+					"id": "parse",
+					"objectClass": "CheckData",
+					"sid": 211101894803239,
 					"parameters": {
-						"where": "back",
-						"value": "WebSocket.MessageText",
-						"axis": "x"
+						"data": "WebSocket.MessageText"
 					}
 				}
 			],
-			"sid": 593181293306762
+			"sid": 593181293306762,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "PingPong"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-value",
+							"objectClass": "CheckData",
+							"sid": 665531960908116,
+							"parameters": {
+								"path": "\"type\"",
+								"cmp": 0,
+								"value": "\"1004\""
+							}
+						}
+					],
+					"actions": [],
+					"sid": 546255290754305,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "RequestData",
+									"sid": 991227690765976,
+									"parameters": {
+										"unique-id": "Functions.CreateEmptyRequest"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "RequestChangeType",
+									"sid": 812424446740704,
+									"parameters": [
+										"\"1004\""
+									]
+								},
+								{
+									"callFunction": "SendMessageSocket",
+									"sid": 559271983715900
+								}
+							],
+							"sid": 159474852921180
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 282876707952005
+						}
+					],
+					"actions": [
+						{
+							"id": "push",
+							"objectClass": "CurrentMessageData",
+							"sid": 824139472873950,
+							"parameters": {
+								"where": "back",
+								"value": "WebSocket.MessageText",
+								"axis": "x"
+							}
+						}
+					],
+					"sid": 250487758912465
+				}
+			]
 		},
 		{
 			"eventType": "block",
@@ -579,56 +652,6 @@
 							"children": [
 								{
 									"eventType": "comment",
-									"text": "PingPong"
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "compare-value",
-											"objectClass": "WebsocketMessage",
-											"sid": 664066914024253,
-											"parameters": {
-												"path": "\"type\"",
-												"cmp": 0,
-												"value": "\"1004\""
-											}
-										}
-									],
-									"actions": [],
-									"sid": 662361065151197,
-									"children": [
-										{
-											"eventType": "block",
-											"conditions": [
-												{
-													"id": "pick-by-unique-id",
-													"objectClass": "RequestData",
-													"sid": 859455331043816,
-													"parameters": {
-														"unique-id": "Functions.CreateEmptyRequest"
-													}
-												}
-											],
-											"actions": [
-												{
-													"callFunction": "RequestChangeType",
-													"sid": 281983538708159,
-													"parameters": [
-														"\"1004\""
-													]
-												},
-												{
-													"callFunction": "SendMessageSocket",
-													"sid": 245694560939985
-												}
-											],
-											"sid": 277101553186037
-										}
-									]
-								},
-								{
-									"eventType": "comment",
 									"text": "Message from server"
 								},
 								{
@@ -682,6 +705,56 @@
 												}
 											],
 											"sid": 153798213046155
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-value",
+													"objectClass": "WebsocketMessage",
+													"sid": 596094005649796,
+													"parameters": {
+														"path": "\"data.input\"",
+														"cmp": 0,
+														"value": "\"answer\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"callFunction": "AcceptAnswer",
+													"sid": 125269579377596,
+													"parameters": [
+														"WebsocketMessage.Get(\"data.content.answer\")"
+													]
+												}
+											],
+											"sid": 452212524440802
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-value",
+													"objectClass": "WebsocketMessage",
+													"sid": 876200788921038,
+													"parameters": {
+														"path": "\"data.input\"",
+														"cmp": 0,
+														"value": "\"candidate\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"callFunction": "AddCandidate",
+													"sid": 789130485605061,
+													"parameters": [
+														"WebsocketMessage.Get(\"data.content.candidate\")"
+													]
+												}
+											],
+											"sid": 377426977114215
 										}
 									]
 								}

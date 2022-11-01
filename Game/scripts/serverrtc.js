@@ -41,10 +41,10 @@ export function CreateAnswer(offer)
 {
 	if(Client == null)
 	{
-		Client = new RTCPeerConnection(iceConfiguration);
+		Client = new RTCPeerConnection();
 		
 		//ini diubah jadi ngirim data ice candidate
-		Client.onicecandidate = () => {runtime.callFunction("SignalIceCandidate",[JSON.stringify(Client.localDescription)])};
+		Client.onicecandidate = () => {runtime.callFunction("SendAnswer",[JSON.stringify(Client.localDescription)])};
 		
 		Client.ondatachannel = e => 
 		{
@@ -53,16 +53,18 @@ export function CreateAnswer(offer)
 			dataChannel.onopen = e => console.log("masuk");
 		}
 		
-		Client.setRemoteDescription(offer);
+		Client.setRemoteDescription(JSON.parse(offer));
 		
 		//ini yang nanti dikirim buat answer
-		Client.createAnswer().then(answer => 
+		Client.createAnswer()
+		.then(answer => Client.setLocalDescription(answer))
+		.then(() => 
 		{
-			Client.setLocalDescription(answer);
-			console.log(JSON.stringify(answer) + " INI YANG ASLI");
+			runtime.callFunction("SendAnswer",[JSON.stringify(Client.localDescription)]);
 		});
 	}
 }
+
 
 export function SendMessage(data)
 {
@@ -71,5 +73,6 @@ export function SendMessage(data)
 
 export function AddIceCandidate(data)
 {
-	Client.addIceCandidate(offer);
+	Client.addIceCandidate(JSON.parse(data));
+	console.log(Client.connectionState);
 }

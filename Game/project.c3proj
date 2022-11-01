@@ -103,6 +103,22 @@
 			"bundled": false
 		},
 		{
+			"type": "plugin",
+			"id": "Keyboard",
+			"name": "Keyboard",
+			"author": "Scirra",
+			"version": "r308.2",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "TextBox",
+			"name": "Text input",
+			"author": "Scirra",
+			"version": "r308.2",
+			"bundled": false
+		},
+		{
 			"type": "behavior",
 			"id": "Anchor",
 			"name": "Anchor",
@@ -113,7 +129,12 @@
 	],
 	"uniqueId": "isw18igdmib",
 	"objectTypes": {
-		"items": [],
+		"items": [
+			"ConnectWEBRTC",
+			"InfoWebRTCConnection",
+			"Keyboard",
+			"IceInput"
+		],
 		"subfolders": [
 			{
 				"items": [
@@ -206,7 +227,8 @@
 	"eventSheets": {
 		"items": [
 			"DebuggerEvent",
-			"LayoutControllerEvent"
+			"LayoutControllerEvent",
+			"ServerRTC"
 		],
 		"subfolders": [
 			{
@@ -226,7 +248,24 @@
 	},
 	"rootFileFolders": {
 		"script": {
-			"items": [],
+			"items": [
+				{
+					"name": "EventScript.js",
+					"type": "application/javascript",
+					"sid": 506829018564636,
+					"script-info": {
+						"purpose": "imports-for-events"
+					}
+				},
+				{
+					"name": "ServerRTC.js",
+					"type": "application/javascript",
+					"sid": 257608742251889,
+					"script-info": {
+						"purpose": "none"
+					}
+				}
+			],
 			"subfolders": []
 		},
 		"sound": {

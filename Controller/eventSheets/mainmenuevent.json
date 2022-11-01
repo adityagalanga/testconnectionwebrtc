@@ -10,10 +10,6 @@
 			"includeSheet": "ClientRTC"
 		},
 		{
-			"eventType": "include",
-			"includeSheet": "ServerRTC"
-		},
-		{
 			"eventType": "block",
 			"conditions": [
 				{

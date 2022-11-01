@@ -490,6 +490,12 @@
 			},
 			"uid": 58,
 			"instanceVariables": {}
+		},
+		{
+			"type": "CheckData",
+			"properties": {},
+			"uid": 45,
+			"instanceVariables": {}
 		}
 	],
 	"effectTypes": [],

@@ -7,105 +7,6 @@
 			"subLayers": [],
 			"instances": [
 				{
-					"type": "MenuButton",
-					"properties": {
-						"type": "button",
-						"text": "Joystick",
-						"tooltip": "",
-						"initially-visible": true,
-						"enabled": true,
-						"auto-font-size": true,
-						"checked": false,
-						"id": "",
-						"class": ""
-					},
-					"uid": 27,
-					"instanceVariables": {
-						"direct": "ExampleJoystick"
-					},
-					"behaviors": {},
-					"world": {
-						"x": 300,
-						"y": 281,
-						"width": 271.1088342345192,
-						"height": 90.36961141150638,
-						"originX": 0,
-						"originY": 0,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						]
-					}
-				},
-				{
-					"type": "MenuButton",
-					"properties": {
-						"type": "button",
-						"text": "Shake",
-						"tooltip": "",
-						"initially-visible": true,
-						"enabled": true,
-						"auto-font-size": true,
-						"checked": false,
-						"id": "",
-						"class": ""
-					},
-					"uid": 40,
-					"instanceVariables": {
-						"direct": "ExampleShake"
-					},
-					"behaviors": {},
-					"world": {
-						"x": 299,
-						"y": 425,
-						"width": 271.1088342345192,
-						"height": 90.36961141150638,
-						"originX": 0,
-						"originY": 0,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						]
-					}
-				},
-				{
-					"type": "MenuButton",
-					"properties": {
-						"type": "button",
-						"text": "Dpad",
-						"tooltip": "",
-						"initially-visible": true,
-						"enabled": true,
-						"auto-font-size": true,
-						"checked": false,
-						"id": "",
-						"class": ""
-					},
-					"uid": 45,
-					"instanceVariables": {
-						"direct": "ExampleDpad"
-					},
-					"behaviors": {},
-					"world": {
-						"x": 293,
-						"y": 578,
-						"width": 271.1088342345192,
-						"height": 90.36961141150638,
-						"originX": 0,
-						"originY": 0,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						]
-					}
-				},
-				{
 					"type": "IceInput",
 					"properties": {
 						"text": "",
@@ -124,8 +25,8 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 1304,
-						"y": 276,
+						"x": 1401,
+						"y": 80,
 						"width": 484,
 						"height": 137,
 						"originX": 0,

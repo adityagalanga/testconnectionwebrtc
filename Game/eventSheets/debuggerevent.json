@@ -6,6 +6,35 @@
 			"includeSheet": "WebSocketEvent"
 		},
 		{
+			"eventType": "include",
+			"includeSheet": "ServerRTC"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 373255165923799
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "ShowGameVersion",
+					"sid": 795142311645745
+				},
+				{
+					"callFunction": "ChangeCurrentLayout",
+					"sid": 365872426043107,
+					"parameters": [
+						"\"MainMenuLayout\"",
+						true
+					]
+				}
+			],
+			"sid": 670014601933406
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -21,6 +50,7 @@
 				}
 			],
 			"sid": 615341773515249,
+			"disabled": true,
 			"children": [
 				{
 					"eventType": "block",
@@ -36,6 +66,7 @@
 						}
 					],
 					"sid": 223758399794144,
+					"disabled": true,
 					"children": [
 						{
 							"eventType": "block",
@@ -59,141 +90,12 @@
 									}
 								}
 							],
-							"sid": 385609733054466
+							"sid": 385609733054466,
+							"disabled": true
 						}
 					]
 				}
 			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-start-of-layout",
-					"objectClass": "System",
-					"sid": 196012172720443
-				}
-			],
-			"actions": [
-				{
-					"callFunction": "ShowGameVersion",
-					"sid": 293738109283969
-				},
-				{
-					"callFunction": "ChangeCurrentLayout",
-					"sid": 757324126264571,
-					"parameters": [
-						"\"MainMenuLayout\"",
-						true
-					]
-				}
-			],
-			"sid": 984779849097517
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-clicked",
-					"objectClass": "ClearMessage",
-					"sid": 260711122440146
-				}
-			],
-			"actions": [
-				{
-					"id": "set-text",
-					"objectClass": "MessageText",
-					"sid": 542691556606084,
-					"parameters": {
-						"text": "\"\""
-					}
-				}
-			],
-			"sid": 661926925763511
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-clicked",
-					"objectClass": "ButtonChangeDpad",
-					"sid": 939970064391295
-				}
-			],
-			"actions": [
-				{
-					"callFunction": "ChangeCurrentLayout",
-					"sid": 708594954188007,
-					"parameters": [
-						"\"ExampleDpad\"",
-						true
-					]
-				}
-			],
-			"sid": 810734682194720
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-clicked",
-					"objectClass": "ButtonChangeShake",
-					"sid": 451517336392418
-				}
-			],
-			"actions": [
-				{
-					"callFunction": "ChangeCurrentLayout",
-					"sid": 336763167785573,
-					"parameters": [
-						"\"ExampleShake\"",
-						true
-					]
-				}
-			],
-			"sid": 301798016785686
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-clicked",
-					"objectClass": "ButtonChangeJoyStick",
-					"sid": 771378132115797
-				}
-			],
-			"actions": [
-				{
-					"callFunction": "ChangeCurrentLayout",
-					"sid": 871520214844914,
-					"parameters": [
-						"\"ExampleJoyStick\"",
-						true
-					]
-				}
-			],
-			"sid": 685324301319814
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-clicked",
-					"objectClass": "ButtonChangeMainMenuLayout",
-					"sid": 682788263420196
-				}
-			],
-			"actions": [
-				{
-					"callFunction": "ChangeCurrentLayout",
-					"sid": 839790535533103,
-					"parameters": [
-						"\"MainMenuLayout\"",
-						true
-					]
-				}
-			],
-			"sid": 665643121897024
 		}
 	],
 	"sid": 494991316765729

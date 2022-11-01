@@ -37,27 +37,32 @@ export const iceConfiguration = {
 	],
 }
 
-export function CreateOffer()
+export async function CreateOffer()
 {
 	if(Server == null)
 	{
-		Server = new RTCPeerConnection(iceConfiguration);
+		Server = new RTCPeerConnection();
 		dataChannel = Server.createDataChannel("channel");
 
 		dataChannel.onmessage = e => console.log(e.data);
-		dataChannel.onopen = e => console.log("KONEKSI MASUK");
+		dataChannel.onopen = e => console.log("masuk");
 		
 		//ini diubah jadi ngirim data ice candidate
-		Server.onicecandidate = () => {runtime.callFunction("SignalIceCandidate",[JSON.stringify(Server.localDescription)])};
+		Server.onicecandidate = () => {runtime.callFunction("SendOffer",[JSON.stringify(Server.localDescription)])};
 		
 		//ini yang nanti dikirim buat answer
-		Server.createOffer().then(offer =>Server.setLocalDescription(offer));
+		Server.createOffer()
+		.then(offer => Server.setLocalDescription(offer))
+		.then(() => 
+		{
+			runtime.callFunction("SendOffer",[JSON.stringify(Server.localDescription)]);
+		});
 	}
 }
 
 export function SetRemoteDescription(data)
 {
-	Server.setRemoteDescription(data);
+	Server.setRemoteDescription(JSON.parse(data));
 }
 
 export function SendMessage(data)
@@ -65,7 +70,14 @@ export function SendMessage(data)
 	dataChannel.send(data);
 }
 
+export function CheckState()
+{
+	console.log(Server.signalingState);
+	console.log(Server.connectionState);
+}
+
 export function AddIceCandidate(data)
 {
-	Server.addIceCandidate(offer);
+	Server.addIceCandidate(JSON.parse(data));
+	console.log(Server.connectionState);
 }
