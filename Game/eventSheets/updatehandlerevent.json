@@ -1,0 +1,122 @@
+{
+	"name": "UpdateHandlerEvent",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "WebSocketEvent"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 395670434934616
+				}
+			],
+			"actions": [
+				{
+					"type": "comment",
+					"text": "init language"
+				},
+				{
+					"callFunction": "InitLanguage",
+					"sid": 586049479825562
+				},
+				{
+					"id": "wait-for-previous-actions",
+					"objectClass": "System",
+					"sid": 838497113433166
+				},
+				{
+					"id": "set-text",
+					"objectClass": "UpdateText",
+					"sid": 226862837013265,
+					"parameters": {
+						"text": "Functions.GetLanguage(\"load_assets\")"
+					}
+				},
+				{
+					"type": "comment",
+					"text": "Done"
+				},
+				{
+					"id": "wait-for-previous-actions",
+					"objectClass": "System",
+					"sid": 244396734177654
+				}
+			],
+			"sid": 351218444893120,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-wake-lock-supported",
+							"objectClass": "PlatformInfo",
+							"sid": 931767759140481
+						}
+					],
+					"actions": [
+						{
+							"id": "request-wake-lock",
+							"objectClass": "PlatformInfo",
+							"sid": 115321271777992
+						}
+					],
+					"sid": 852154198331694
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "UpdateText",
+							"sid": 393585545043503,
+							"parameters": {
+								"text": "Functions.GetLanguage(\"connecting_server\")"
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 235322264047659,
+							"parameters": {
+								"type": "log",
+								"message": "\"Trying Connect To Server\""
+							}
+						},
+						{
+							"callFunction": "ConnectWebSocket",
+							"sid": 835826124158519
+						}
+					],
+					"sid": 348287924769350
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-opened",
+					"objectClass": "WebSocket",
+					"sid": 394186699501775
+				}
+			],
+			"actions": [
+				{
+					"id": "go-to-layout",
+					"objectClass": "System",
+					"sid": 827354028168480,
+					"parameters": {
+						"layout": "DebuggerLayout"
+					}
+				}
+			],
+			"sid": 969151210890660
+		}
+	],
+	"sid": 481130606901373
+}

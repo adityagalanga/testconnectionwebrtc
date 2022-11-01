@@ -1,0 +1,31 @@
+{
+	"name": "LangFam",
+	"plugin-id": "Text",
+	"sid": 779194375888089,
+	"instanceVariables": [
+		{
+			"name": "localization_key",
+			"type": "string",
+			"desc": "",
+			"sid": 318966918311786
+		},
+		{
+			"name": "string1",
+			"type": "string",
+			"desc": "",
+			"sid": 962006611769116
+		},
+		{
+			"name": "string2",
+			"type": "string",
+			"desc": "",
+			"sid": 502967849596684
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"UpdateText",
+		"StaticText"
+	]
+}

@@ -1,0 +1,362 @@
+{
+	"name": "RequestDataEvent",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "PathToControllerID",
+			"type": "string",
+			"initialValue": "data.controller_id",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 364547852377754
+		},
+		{
+			"eventType": "variable",
+			"name": "PathToInput",
+			"type": "string",
+			"initialValue": "data.input",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 995928762798755
+		},
+		{
+			"eventType": "variable",
+			"name": "PathToContent",
+			"type": "string",
+			"initialValue": "data.content",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 418997564330329
+		},
+		{
+			"eventType": "variable",
+			"name": "PathToType",
+			"type": "string",
+			"initialValue": "type",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 836866156339147
+		},
+		{
+			"functionName": "CreateRequest",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "number",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "create-object",
+					"objectClass": "System",
+					"sid": 784911659383310,
+					"parameters": {
+						"object-to-create": "RequestData",
+						"layer": "0",
+						"x": "0",
+						"y": "0",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "set-value",
+					"objectClass": "RequestData",
+					"sid": 193157893175474,
+					"parameters": {
+						"path": "PathToType",
+						"value": "\"4001\""
+					}
+				},
+				{
+					"id": "set-value",
+					"objectClass": "RequestData",
+					"sid": 644122527141334,
+					"parameters": {
+						"path": "PathToInput",
+						"value": "\"\""
+					}
+				},
+				{
+					"id": "set-array",
+					"objectClass": "RequestData",
+					"sid": 878972279799153,
+					"parameters": {
+						"path": "PathToControllerID",
+						"size": "0"
+					}
+				},
+				{
+					"id": "set-object",
+					"objectClass": "RequestData",
+					"sid": 635307139126836,
+					"parameters": {
+						"path": "PathToContent"
+					}
+				},
+				{
+					"id": "set-function-return-value",
+					"objectClass": "Functions",
+					"sid": 156447913057400,
+					"parameters": {
+						"value": "RequestData.UID"
+					}
+				}
+			],
+			"sid": 518658152205159
+		},
+		{
+			"functionName": "CreateEmptyRequest",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "number",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "create-object",
+					"objectClass": "System",
+					"sid": 524269594937854,
+					"parameters": {
+						"object-to-create": "RequestData",
+						"layer": "0",
+						"x": "0",
+						"y": "0",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "set-function-return-value",
+					"objectClass": "Functions",
+					"sid": 265698348790657,
+					"parameters": {
+						"value": "RequestData.UID"
+					}
+				}
+			],
+			"sid": 299912046472174
+		},
+		{
+			"functionName": "RequestChangeType",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "none",
+			"functionCopyPicked": true,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "TypeValue",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 603985687584724
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-value",
+					"objectClass": "RequestData",
+					"sid": 600456762153429,
+					"parameters": {
+						"path": "PathToType",
+						"value": "TypeValue"
+					}
+				}
+			],
+			"sid": 448944040846082
+		},
+		{
+			"functionName": "ChangeRequestInput",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "none",
+			"functionCopyPicked": true,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "RequestValue",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 407693372463079
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-value",
+					"objectClass": "RequestData",
+					"sid": 767913406237166,
+					"parameters": {
+						"path": "PathToInput",
+						"value": "RequestValue"
+					}
+				}
+			],
+			"sid": 147710416139642
+		},
+		{
+			"functionName": "AddPlayerToRequest",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "none",
+			"functionCopyPicked": true,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "controller_id",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 431794463588996
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "push-value",
+					"objectClass": "RequestData",
+					"sid": 858037244044710,
+					"parameters": {
+						"where": "back",
+						"path": "PathToControllerID",
+						"value": "controller_id"
+					}
+				}
+			],
+			"sid": 448535061932742
+		},
+		{
+			"functionName": "AddAllPlayerToRequest",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "none",
+			"functionCopyPicked": true,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 387245726909115,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 321713740912479,
+							"parameters": {
+								"object": "PlayerConsole"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "push-value",
+							"objectClass": "RequestData",
+							"sid": 430033020183066,
+							"parameters": {
+								"where": "back",
+								"path": "PathToControllerID",
+								"value": "PlayerConsole.id"
+							}
+						}
+					],
+					"sid": 105175732725183
+				}
+			]
+		},
+		{
+			"functionName": "AddContentNumber",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "none",
+			"functionCopyPicked": true,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "ContentName",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 549425137187664
+				},
+				{
+					"name": "ContentValue",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 167822344428241
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-value",
+					"objectClass": "RequestData",
+					"sid": 990762189435129,
+					"parameters": {
+						"path": "PathToContent &\".\"& ContentName",
+						"value": "ContentValue"
+					}
+				}
+			],
+			"sid": 504365363354339
+		},
+		{
+			"functionName": "AddContentString",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "none",
+			"functionCopyPicked": true,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "ContentName",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 690219533482538
+				},
+				{
+					"name": "ContentValue",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 477338489198504
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-value",
+					"objectClass": "RequestData",
+					"sid": 435668808789073,
+					"parameters": {
+						"path": "PathToContent &\".\"&ContentName",
+						"value": "ContentValue"
+					}
+				}
+			],
+			"sid": 687068898647914
+		}
+	],
+	"sid": 432333001511647
+}

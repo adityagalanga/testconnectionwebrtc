@@ -1,0 +1,13 @@
+{
+    "c2dictionary": true,
+    "data": {
+        "en_load_assets": "Load Asset Data . . .",
+        "id_load_assets": "Memuat Data Aset . . .",
+        "en_check_for_update": "Check For Update . . .",
+        "id_check_for_update": "Memeriksa Pembaruan . . .",
+        "en_downloading_update": "Downloading Update",
+        "id_downloading_update": "Mengunduh Pembaruan",
+        "en_downloading_done": "Update Downloaded and Ready To Install",
+        "id_downloading_done": "Pembaruan Diunduh dan Siap Dipasang"
+    }
+}

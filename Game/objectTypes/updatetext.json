@@ -1,0 +1,16 @@
+{
+	"name": "UpdateText",
+	"plugin-id": "Text",
+	"sid": 106708644294833,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "CountDot",
+			"type": "number",
+			"desc": "",
+			"sid": 385821254207421
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": []
+}

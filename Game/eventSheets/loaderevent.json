@@ -1,0 +1,226 @@
+{
+	"name": "LoaderEvent",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "IsLoaderComplete",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 174984493448233
+		},
+		{
+			"eventType": "variable",
+			"name": "FadeInSplash",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 891797036535069
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 352841663314975
+				}
+			],
+			"actions": [
+				{
+					"id": "play-timeline",
+					"objectClass": "TimeLine",
+					"sid": 182313125797378,
+					"parameters": {
+						"timeline": "SplashFadeIN",
+						"tags": "\"In\""
+					}
+				}
+			],
+			"sid": 816779821774155
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 199325176936542
+				}
+			],
+			"actions": [
+				{
+					"id": "set-width",
+					"objectClass": "LoadingBar",
+					"sid": 779219425978484,
+					"parameters": {
+						"width": "round(loadingprogress*1164)"
+					}
+				}
+			],
+			"sid": 983730245813548,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 188451486952019,
+							"parameters": {
+								"variable": "IsLoaderComplete"
+							}
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 155364746938839,
+							"parameters": {
+								"variable": "FadeInSplash"
+							}
+						},
+						{
+							"id": "is-playing-by-tags",
+							"objectClass": "TimeLine",
+							"sid": 284463671879185,
+							"parameters": {
+								"tags": "\"Out\""
+							},
+							"isInverted": true
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 350433516335517
+						}
+					],
+					"actions": [
+						{
+							"id": "play-timeline",
+							"objectClass": "TimeLine",
+							"sid": 358569227385149,
+							"parameters": {
+								"timeline": "SplashFadeOut",
+								"tags": "\"Out\""
+							}
+						},
+						{
+							"id": "set-layer-visible",
+							"objectClass": "System",
+							"sid": 111050990664701,
+							"parameters": {
+								"layer": "\"Loading\"",
+								"visibility": "invisible"
+							}
+						}
+					],
+					"sid": 696655409924782
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-loader-layout-complete",
+					"objectClass": "System",
+					"sid": 956344732114150
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 710889131998438,
+					"parameters": {
+						"variable": "IsLoaderComplete",
+						"value": "true"
+					}
+				}
+			],
+			"sid": 254918903199003
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timeline-finished-by-tags",
+					"objectClass": "TimeLine",
+					"sid": 291165446282520,
+					"parameters": {
+						"tags": "\"In\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 123299528738379,
+					"parameters": {
+						"variable": "FadeInSplash",
+						"value": "true"
+					}
+				}
+			],
+			"sid": 916296328948069,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 561096251719329,
+							"parameters": {
+								"variable": "IsLoaderComplete"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-layer-visible",
+							"objectClass": "System",
+							"sid": 948311630166699,
+							"parameters": {
+								"layer": "\"Loading\"",
+								"visibility": "visible"
+							}
+						}
+					],
+					"sid": 190247576426143
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timeline-finished-by-tags",
+					"objectClass": "TimeLine",
+					"sid": 502826507976898,
+					"parameters": {
+						"tags": "\"Out\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "go-to-layout",
+					"objectClass": "System",
+					"sid": 381389740730936,
+					"parameters": {
+						"layout": "UpdateHandlerLayout"
+					}
+				}
+			],
+			"sid": 255800783280937
+		}
+	],
+	"sid": 926360490170568
+}

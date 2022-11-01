@@ -1,0 +1,554 @@
+{
+	"name": "WebSocketEvent",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "DEFAULT_URL_SOCKET",
+			"type": "string",
+			"initialValue": "nconsole.onigiri.fira.id",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 435350654459718
+		},
+		{
+			"eventType": "variable",
+			"name": "WEBSOCKET_URL",
+			"type": "string",
+			"initialValue": "wss://nconsole.onigiri.fira.id/game_display/backbone",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 865910542521193
+		},
+		{
+			"eventType": "variable",
+			"name": "ROOM_PARAM",
+			"type": "string",
+			"initialValue": "",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 516252698130679
+		},
+		{
+			"eventType": "variable",
+			"name": "GAMESOCKETID",
+			"type": "string",
+			"initialValue": "backbone",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 331591650112675
+		},
+		{
+			"functionName": "ConnectWebSocket",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 727749056130383,
+					"parameters": {
+						"variable": "WEBSOCKET_URL",
+						"value": "Browser.Protocol = \"https:\" ? \"wss\" : \"ws\""
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 644658632728634,
+					"parameters": {
+						"variable": "WEBSOCKET_URL",
+						"value": "WEBSOCKET_URL & \"://\" & (Browser.Domain =  \"preview.construct.net\" ? DEFAULT_URL_SOCKET : Browser.Domain)"
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 188326785717975,
+					"parameters": {
+						"variable": "WEBSOCKET_URL",
+						"value": "WEBSOCKET_URL & (Browser.Port = \"\" ? \"\" : \":\" &Browser.Port)"
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 516060890767069,
+					"parameters": {
+						"variable": "WEBSOCKET_URL",
+						"value": "WEBSOCKET_URL &\"/game_display/\"&GAMESOCKETID"
+					}
+				},
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 780591973480879,
+					"parameters": {
+						"type": "log",
+						"message": "WEBSOCKET_URL"
+					}
+				}
+			],
+			"sid": 220286942977910,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-open",
+							"objectClass": "WebSocket",
+							"sid": 795454510660577,
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 738428103247759,
+							"parameters": {
+								"variable": "ROOM_PARAM",
+								"value": "Browser.QueryParam(\"room\")"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 963771581132064,
+							"parameters": {
+								"variable": "ROOM_PARAM",
+								"value": "ROOM_PARAM <> \"\"  ? \"/\" &ROOM_PARAM : \"\""
+							}
+						},
+						{
+							"id": "connect",
+							"objectClass": "WebSocket",
+							"sid": 154582237545615,
+							"parameters": {
+								"url": "WEBSOCKET_URL & ROOM_PARAM",
+								"protocol-optional": "\"\""
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 264173454388043,
+							"parameters": {
+								"type": "log",
+								"message": "\"Trying to Connect Socket : \" & WEBSOCKET_URL & ROOM_PARAM"
+							}
+						}
+					],
+					"sid": 485875151193880
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-opened",
+					"objectClass": "WebSocket",
+					"sid": 555799890879153
+				}
+			],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 740288792315309,
+					"parameters": {
+						"type": "log",
+						"message": "\"=====SOCKET OPEN=====\""
+					}
+				}
+			],
+			"sid": 338684184260060
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-closed",
+					"objectClass": "WebSocket",
+					"sid": 422099792046910
+				}
+			],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 618912199632631,
+					"parameters": {
+						"type": "log",
+						"message": "\"=====SOCKET CLOSE=====\""
+					}
+				},
+				{
+					"id": "reload",
+					"objectClass": "Browser",
+					"sid": 611853134117080
+				}
+			],
+			"sid": 958908788233943
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-message",
+					"objectClass": "WebSocket",
+					"sid": 140591937614066
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "HandleMessageWebSocket",
+					"sid": 181549986197399,
+					"parameters": [
+						"WebSocket.MessageText"
+					]
+				},
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 283162809383820,
+					"parameters": {
+						"type": "log",
+						"message": "WebSocket.MessageText"
+					}
+				}
+			],
+			"sid": 593181293306762
+		},
+		{
+			"functionName": "SendMessageSocket",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "none",
+			"functionCopyPicked": true,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "send-text",
+					"objectClass": "WebSocket",
+					"sid": 769600424691310,
+					"parameters": {
+						"data": "RequestData.ToCompactString"
+					}
+				},
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 988013590801322,
+					"parameters": {
+						"type": "log",
+						"message": "\"Send Message : \" & RequestData.ToBeautifiedString"
+					}
+				},
+				{
+					"id": "destroy",
+					"objectClass": "RequestData",
+					"sid": 222642304819609
+				}
+			],
+			"sid": 102045995521478
+		},
+		{
+			"functionName": "HandleMessageWebSocket",
+			"functionDescription": "",
+			"functionCategory": "RequestData Socket",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "Message",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 894559608241803
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "parse",
+					"objectClass": "WebsocketMessage",
+					"sid": 793019331795777,
+					"parameters": {
+						"data": "Message"
+					}
+				},
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 823813506180563,
+					"parameters": {
+						"type": "log",
+						"message": "\"New Message \" & Message"
+					}
+				}
+			],
+			"sid": 722464188803891,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "has-key",
+							"objectClass": "WebsocketMessage",
+							"sid": 137808403367248,
+							"parameters": {
+								"path": "\"type\""
+							}
+						}
+					],
+					"actions": [],
+					"sid": 948848516226801,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 744476104837101,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"DebuggerLayout\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "append-text",
+									"objectClass": "MessageText",
+									"sid": 578107870835321,
+									"parameters": {
+										"text": "newline & WebsocketMessage.ToCompactString"
+									}
+								}
+							],
+							"sid": 567344649449934
+						},
+						{
+							"eventType": "comment",
+							"text": "OnDisconnected User"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-value",
+									"objectClass": "WebsocketMessage",
+									"sid": 846688892811947,
+									"parameters": {
+										"path": "\"type\"",
+										"cmp": 0,
+										"value": "\"1004\""
+									}
+								}
+							],
+							"actions": [],
+							"sid": 489988276965822,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-unique-id",
+											"objectClass": "RequestData",
+											"sid": 606413410932317,
+											"parameters": {
+												"unique-id": "Functions.CreateEmptyRequest"
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "RequestChangeType",
+											"sid": 501470955076053,
+											"parameters": [
+												"\"1004\""
+											]
+										},
+										{
+											"callFunction": "SendMessageSocket",
+											"sid": 342596751478421
+										}
+									],
+									"sid": 519098245706084
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "OnConnected User"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-value",
+									"objectClass": "WebsocketMessage",
+									"sid": 907459148160021,
+									"parameters": {
+										"path": "\"type\"",
+										"cmp": 0,
+										"value": "\"1001\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 953892879936025,
+									"parameters": {
+										"object-to-create": "PlayerConsole",
+										"layer": "0",
+										"x": "-100",
+										"y": "-100",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "PlayerConsole",
+									"sid": 267993498483961,
+									"parameters": {
+										"instance-variable": "id",
+										"value": "WebsocketMessage.Get(\"data.id\")"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "PlayerConsole",
+									"sid": 648449027822215,
+									"parameters": {
+										"instance-variable": "name",
+										"value": "WebsocketMessage.Get(\"data.name\")"
+									}
+								},
+								{
+									"callFunction": "SendCurrentLayout",
+									"sid": 693119633150338,
+									"parameters": [
+										"WebsocketMessage.Get(\"data.id\")"
+									]
+								}
+							],
+							"sid": 904348371307737
+						},
+						{
+							"eventType": "comment",
+							"text": "OnDisconnected User"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-value",
+									"objectClass": "WebsocketMessage",
+									"sid": 420550417619555,
+									"parameters": {
+										"path": "\"type\"",
+										"cmp": 0,
+										"value": "\"1002\""
+									}
+								}
+							],
+							"actions": [],
+							"sid": 735128937433231,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 717243921110938,
+											"parameters": {
+												"object": "PlayerConsole",
+												"expression": "PlayerConsole.id",
+												"comparison": 0,
+												"value": "str(WebsocketMessage.Get(\"data.id\"))"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "destroy",
+											"objectClass": "PlayerConsole",
+											"sid": 461354430925721
+										}
+									],
+									"sid": 495721019497507
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "On Room Master Changed"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-value",
+									"objectClass": "WebsocketMessage",
+									"sid": 856381906082268,
+									"parameters": {
+										"path": "\"type\"",
+										"cmp": 0,
+										"value": "\"1003\""
+									}
+								}
+							],
+							"actions": [],
+							"sid": 972698972993301
+						},
+						{
+							"eventType": "comment",
+							"text": "Message from server"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-value",
+									"objectClass": "WebsocketMessage",
+									"sid": 430432835601691,
+									"parameters": {
+										"path": "\"type\"",
+										"cmp": 0,
+										"value": "\"3001\""
+									}
+								}
+							],
+							"actions": [],
+							"sid": 491417869130898
+						}
+					]
+				}
+			]
+		}
+	],
+	"sid": 305435439472788
+}

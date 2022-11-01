@@ -1,0 +1,322 @@
+{
+	"name": "LayoutControllerEvent",
+	"events": [
+		{
+			"functionName": "ChangeCurrentLayout",
+			"functionDescription": "",
+			"functionCategory": "Layout Controller",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "layout_name",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 726448754292602
+				},
+				{
+					"name": "SendToAll",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"sid": 742818752116716
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-instvar-value",
+					"objectClass": "ControllerLayoutManager",
+					"sid": 416563633193300,
+					"parameters": {
+						"instance-variable": "CURRENT_LAYOUT",
+						"value": "layout_name"
+					}
+				}
+			],
+			"sid": 952934320392031,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 100839243094148,
+							"parameters": {
+								"variable": "SendToAll"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "CreateAndSendAllCurrentLayout",
+							"sid": 516155053970214
+						}
+					],
+					"sid": 554422638250170
+				}
+			]
+		},
+		{
+			"functionName": "CreateRequestLayout",
+			"functionDescription": "",
+			"functionCategory": "Layout Controller",
+			"functionReturnType": "number",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "AllPlayer",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "1 = ALL PLAYER",
+					"sid": 335831068304897
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 636494285785983,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "RequestData",
+							"sid": 629955310811127,
+							"parameters": {
+								"unique-id": "Functions.CreateRequest"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ChangeRequestInput",
+							"sid": 295714184637532,
+							"parameters": [
+								"\"change_layout\""
+							]
+						},
+						{
+							"callFunction": "AddContentString",
+							"sid": 233835032771699,
+							"parameters": [
+								"\"layout_name\"",
+								"ControllerLayoutManager.CURRENT_LAYOUT"
+							]
+						}
+					],
+					"sid": 531695625730052,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 710761881344319,
+									"parameters": {
+										"variable": "AllPlayer",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 454763293928934,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each",
+											"objectClass": "System",
+											"sid": 692641224947001,
+											"parameters": {
+												"object": "PlayerConsole"
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "AddPlayerToRequest",
+											"sid": 864781296177906,
+											"parameters": [
+												"PlayerConsole.id"
+											]
+										}
+									],
+									"sid": 635124853260294
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "set-function-return-value",
+											"objectClass": "Functions",
+											"sid": 302429772554418,
+											"parameters": {
+												"value": "RequestData.UID"
+											}
+										}
+									],
+									"sid": 444733008837796
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 185024415087443
+								}
+							],
+							"actions": [
+								{
+									"id": "set-function-return-value",
+									"objectClass": "Functions",
+									"sid": 756378263132213,
+									"parameters": {
+										"value": "RequestData.UID"
+									}
+								}
+							],
+							"sid": 414384200680215
+						}
+					]
+				}
+			]
+		},
+		{
+			"functionName": "CreateAndSendAllCurrentLayout",
+			"functionDescription": "Create and Send All player current layout",
+			"functionCategory": "Layout Controller",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 237848785021740,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "RequestData",
+							"sid": 810938163520428,
+							"parameters": {
+								"unique-id": "Functions.CreateRequestLayout(1)"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "SendMessageSocket",
+							"sid": 939946293423129
+						}
+					],
+					"sid": 378772395004626
+				}
+			]
+		},
+		{
+			"functionName": "GetCurrentLayoutController",
+			"functionDescription": "",
+			"functionCategory": "Layout Controller",
+			"functionReturnType": "string",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-function-return-value",
+					"objectClass": "Functions",
+					"sid": 890884451564946,
+					"parameters": {
+						"value": "ControllerLayoutManager.CURRENT_LAYOUT"
+					}
+				}
+			],
+			"sid": 161217282994599
+		},
+		{
+			"functionName": "SendCurrentLayout",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "PlayerID",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 494954123404613
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 553934363912100,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "RequestData",
+							"sid": 307024257912106,
+							"parameters": {
+								"unique-id": "Functions.CreateRequest"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ChangeRequestInput",
+							"sid": 547710995381406,
+							"parameters": [
+								"\"change_layout\""
+							]
+						},
+						{
+							"callFunction": "AddContentString",
+							"sid": 277774045282338,
+							"parameters": [
+								"\"layout_name\"",
+								"ControllerLayoutManager.CURRENT_LAYOUT"
+							]
+						},
+						{
+							"callFunction": "AddPlayerToRequest",
+							"sid": 174684291301525,
+							"parameters": [
+								"PlayerID"
+							]
+						},
+						{
+							"callFunction": "SendMessageSocket",
+							"sid": 863682984300038
+						}
+					],
+					"sid": 435931483093996
+				}
+			]
+		}
+	],
+	"sid": 613583526013298
+}

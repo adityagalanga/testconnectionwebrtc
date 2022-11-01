@@ -1,0 +1,619 @@
+{
+	"name": "AudioEvent",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "BGM_SOUND",
+			"type": "number",
+			"initialValue": "50",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 797919236419287
+		},
+		{
+			"eventType": "variable",
+			"name": "SFX_SOUND",
+			"type": "number",
+			"initialValue": "100",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 299278693671963
+		},
+		{
+			"functionName": "PlayBGM",
+			"functionDescription": "",
+			"functionCategory": "Audio Manager",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "sound_name",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 154582090935459
+				},
+				{
+					"name": "CheckAlreadyPlaying",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"sid": 750725765920825
+				},
+				{
+					"name": "StopCurrentBGM",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"sid": 242779889400075
+				},
+				{
+					"name": "MuteSound",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"sid": 140650003261330
+				},
+				{
+					"name": "UseFadeIn",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"sid": 946959467460299
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 186999192721387,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 762783563788115,
+							"parameters": {
+								"variable": "StopCurrentBGM"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "StopBGM",
+							"sid": 462974989562372
+						}
+					],
+					"sid": 139048277786689
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 386393629369451,
+							"parameters": {
+								"variable": "CheckAlreadyPlaying"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 119039427572549,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-tag-playing",
+									"objectClass": "Audio",
+									"sid": 522058605229680,
+									"parameters": {
+										"tag": "\"BGM\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "play-by-name",
+									"objectClass": "Audio",
+									"sid": 725172172399138,
+									"parameters": {
+										"folder": "sounds",
+										"audio-file-name": "sound_name",
+										"loop": "looping",
+										"volume": "MuteSound = 1 | UseFadeIn = 1 ? -100 : BGM_SOUND",
+										"tag-optional": "\"BGM\""
+									}
+								},
+								{
+									"id": "set-playback-rate",
+									"objectClass": "Audio",
+									"sid": 593927637020258,
+									"parameters": {
+										"tag": "\"BGM\"",
+										"playback-rate": "1.0"
+									}
+								}
+							],
+							"sid": 875768167731999,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 117326907088941,
+											"parameters": {
+												"variable": "UseFadeIn"
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "FadeInEffect",
+											"sid": 713766039155956,
+											"parameters": [
+												"\"BGM\"",
+												true
+											]
+										}
+									],
+									"sid": 104006981563533
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 737557795400755
+						}
+					],
+					"actions": [
+						{
+							"id": "play-by-name",
+							"objectClass": "Audio",
+							"sid": 438563214507130,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "sound_name",
+								"loop": "looping",
+								"volume": "MuteSound = 1 | UseFadeIn = 1 ? -100 : BGM_SOUND",
+								"tag-optional": "\"BGM\""
+							}
+						},
+						{
+							"id": "set-playback-rate",
+							"objectClass": "Audio",
+							"sid": 522718875002178,
+							"parameters": {
+								"tag": "\"BGM\"",
+								"playback-rate": "1.0"
+							}
+						}
+					],
+					"sid": 177942283476908,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 606294088496427,
+									"parameters": {
+										"variable": "UseFadeIn"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "FadeInEffect",
+									"sid": 378815495490802,
+									"parameters": [
+										"\"BGM\"",
+										true
+									]
+								}
+							],
+							"sid": 455448133981405
+						}
+					]
+				}
+			]
+		},
+		{
+			"functionName": "PlaySFX",
+			"functionDescription": "",
+			"functionCategory": "Audio Manager",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "sound_name",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 411940323337662
+				},
+				{
+					"name": "alias_name",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 549284291671238
+				},
+				{
+					"name": "check_playing",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"sid": 187630094720568
+				},
+				{
+					"name": "Looping",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"sid": 746889192335819
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 741562356045891,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 199842744429673,
+							"parameters": {
+								"variable": "check_playing"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 749477703437762,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-tag-playing",
+									"objectClass": "Audio",
+									"sid": 247505442012749,
+									"parameters": {
+										"tag": "alias_name =\"\" ?  sound_name : alias_name"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [],
+							"sid": 206749522415888,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 610087192375202,
+											"parameters": {
+												"variable": "Looping"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "play-by-name",
+											"objectClass": "Audio",
+											"sid": 728079306020430,
+											"parameters": {
+												"folder": "sounds",
+												"audio-file-name": "sound_name",
+												"loop": "looping",
+												"volume": "SFX_SOUND",
+												"tag-optional": "alias_name =\"\" ?  sound_name : alias_name"
+											}
+										}
+									],
+									"sid": 313056931594511
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 457959289165520
+										}
+									],
+									"actions": [
+										{
+											"id": "play-by-name",
+											"objectClass": "Audio",
+											"sid": 287371530372806,
+											"parameters": {
+												"folder": "sounds",
+												"audio-file-name": "sound_name",
+												"loop": "not-looping",
+												"volume": "SFX_SOUND",
+												"tag-optional": "alias_name =\"\" ?  sound_name : alias_name"
+											}
+										}
+									],
+									"sid": 203360525757729
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 169449009362374
+						}
+					],
+					"actions": [],
+					"sid": 547720652210555,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 549891914813200,
+									"parameters": {
+										"variable": "Looping"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "play-by-name",
+									"objectClass": "Audio",
+									"sid": 345175003244535,
+									"parameters": {
+										"folder": "sounds",
+										"audio-file-name": "sound_name",
+										"loop": "looping",
+										"volume": "SFX_SOUND",
+										"tag-optional": "alias_name =\"\" ?  sound_name : alias_name"
+									}
+								}
+							],
+							"sid": 969372675126819
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 239626794740868
+								}
+							],
+							"actions": [
+								{
+									"id": "play-by-name",
+									"objectClass": "Audio",
+									"sid": 425045037925458,
+									"parameters": {
+										"folder": "sounds",
+										"audio-file-name": "sound_name",
+										"loop": "not-looping",
+										"volume": "SFX_SOUND",
+										"tag-optional": "alias_name =\"\" ?  sound_name : alias_name"
+									}
+								}
+							],
+							"sid": 457332667964878
+						}
+					]
+				}
+			]
+		},
+		{
+			"functionName": "StopBGM",
+			"functionDescription": "",
+			"functionCategory": "Audio Manager",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "stop",
+					"objectClass": "Audio",
+					"sid": 516252443897181,
+					"parameters": {
+						"tag": "\"BGM\""
+					}
+				}
+			],
+			"sid": 773284364111442
+		},
+		{
+			"functionName": "StopSound",
+			"functionDescription": "",
+			"functionCategory": "Audio Manager",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "sound_name",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 940320289104103
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "stop",
+					"objectClass": "Audio",
+					"sid": 668624666321030,
+					"parameters": {
+						"tag": "sound_name"
+					}
+				}
+			],
+			"sid": 799302560353577
+		},
+		{
+			"functionName": "FadeInEffect",
+			"functionDescription": "",
+			"functionCategory": "Audio Manager",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "Tag",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 485223578894796
+				},
+				{
+					"name": "IsBGM",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"sid": 110770295443540
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-volume",
+					"objectClass": "Audio",
+					"sid": 593625384347135,
+					"parameters": {
+						"tag": "Tag",
+						"db": "-100"
+					}
+				},
+				{
+					"id": "fade-volume",
+					"objectClass": "Audio",
+					"sid": 595804533610839,
+					"parameters": {
+						"tag": "Tag",
+						"db": "IsBGM = 1 ? BGM_SOUND : SFX_SOUND",
+						"duration": "3",
+						"ending": "keep-playing"
+					}
+				}
+			],
+			"sid": 999882840989712
+		},
+		{
+			"functionName": "FadeOutEffect",
+			"functionDescription": "",
+			"functionCategory": "Audio Manager",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "Tag",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 447356909532146
+				},
+				{
+					"name": "StopSound",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"sid": 813041590468688
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 258004636706738,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 704992254288937,
+							"parameters": {
+								"variable": "StopSound"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "fade-volume",
+							"objectClass": "Audio",
+							"sid": 377926457858891,
+							"parameters": {
+								"tag": "Tag",
+								"db": "-100",
+								"duration": "3",
+								"ending": "stop"
+							}
+						}
+					],
+					"sid": 672572264473140
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 217340572706245
+						}
+					],
+					"actions": [
+						{
+							"id": "fade-volume",
+							"objectClass": "Audio",
+							"sid": 889198555047654,
+							"parameters": {
+								"tag": "Tag",
+								"db": "-100",
+								"duration": "3",
+								"ending": "keep-playing"
+							}
+						}
+					],
+					"sid": 766607566804708
+				}
+			]
+		}
+	],
+	"sid": 585127192427475
+}
