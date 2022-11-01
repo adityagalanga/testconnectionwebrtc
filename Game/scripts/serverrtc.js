@@ -44,7 +44,7 @@ export function CreateAnswer(offer)
 		Client = new RTCPeerConnection();
 		
 		//ini diubah jadi ngirim data ice candidate
-		Client.onicecandidate = () => {runtime.callFunction("SendAnswer",[JSON.stringify(Client.localDescription)])};
+		Client.onicecandidate = () => {runtime.callFunction("SignalIceCandidate",[JSON.stringify(Client.localDescription)])};
 		
 		Client.ondatachannel = e => 
 		{

@@ -48,7 +48,7 @@ export async function CreateOffer()
 		dataChannel.onopen = e => console.log("masuk");
 		
 		//ini diubah jadi ngirim data ice candidate
-		Server.onicecandidate = () => {runtime.callFunction("SendOffer",[JSON.stringify(Server.localDescription)])};
+		Server.onicecandidate = () => {runtime.callFunction("SignalIceCandidate",[JSON.stringify(Server.localDescription)])};
 		
 		//ini yang nanti dikirim buat answer
 		Server.createOffer()
