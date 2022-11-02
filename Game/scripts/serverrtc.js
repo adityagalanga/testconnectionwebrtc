@@ -11,8 +11,8 @@ async function OnBeforeProjectStart(run)
 	runtime = run;
 }
 
-export let Client = null;
-export let dataChannel;
+export let Peers = {};
+export let dataChannel = {};
 
 export const iceConfiguration = {
 	iceServers: [
@@ -25,61 +25,44 @@ export const iceConfiguration = {
 	],
 }
 
-export function CreateAnswer(offer)
+export function CreateAnswer(id,offer)
 {
-	if(Client == null)
-	{
-		Client = new RTCPeerConnection(iceConfiguration);
-		
-		//ini diubah jadi ngirim data ice candidate
-		Client.onicecandidate = (event) => {
-			if(event.candidate != null)
-			{
-				runtime.callFunction("SignalIceCandidate",[JSON.stringify(event.candidate)]);
-			}
-		};
-		
-		Client.ondatachannel = e => 
+	Peers[id] = new RTCPeerConnection(iceConfiguration);
+
+	//ini diubah jadi ngirim data ice candidate
+	Peers[id].onicecandidate = (event) => {
+		if(event.candidate != null)
 		{
-			dataChannel = e.channel;
-			dataChannel.onmessage = e => console.log(e.data);
-			dataChannel.onopen = () => console.log("masuk");		
-			dataChannel.onerror = (error) => 
-			{
-  				console.log("Data Channel Error:", error);
-			};
+			runtime.callFunction("SignalIceCandidate",[id],[JSON.stringify(event.candidate)]);
 		}
-		
-		Client.setRemoteDescription(JSON.parse(offer));
-		console.log(JSON.parse(offer));
-		
-		//ini yang nanti dikirim buat answer
-		Client.createAnswer()
-		.then(answer => Client.setLocalDescription(answer))
-		.then(() => 
-		{
-			runtime.callFunction("SendAnswer",[JSON.stringify(Client.localDescription)]);
-		});
+	};
+
+	Peers[id].ondatachannel = e => 
+	{
+		dataChannel[id] = e.channel;
+		dataChannel[id].onopen = () => runtime.callFunction("OnOpenClient",[id]);
+		dataChannel[id].onmessage = e => runtime.callFunction("OnMessageClient",[id],[e.data]);
+		dataChannel[id].onerror = (error) => runtime.callFunction("OnErrorClient",[id],[error]);
+		dataChannel[id].onclose = (close) => runtime.callFunction("OnCloseClient",[id],[close]);
 	}
+
+	Peers[id].setRemoteDescription(JSON.parse(offer));
+
+	//ini yang nanti dikirim buat answer
+	Peers[id].createAnswer()
+		.then(answer => Peers[id].setLocalDescription(answer))
+		.then(() => 
+			  {
+		runtime.callFunction("SendAnswer",[id],[JSON.stringify(Peers[id].localDescription)]);
+	});
 }
 
-export function CheckState()
+export function SendMessage(id,data)
 {
-	console.log(Client.signalingState);
-	console.log(Client.connectionState);
-	console.log(Client.iceConnectionState);
-	console.log(Client.iceGatheringState);
-	console.log(Client.currentLocalDescription);
-	console.log(Client.currentRemoteDescription);
+	dataChannel[id].send(data);
 }
 
-export function SendMessage(data)
-{
-	dataChannel.send(data);
-}
-
-export function AddIceCandidate(data)
+export function AddIceCandidate(id,data)
 {	
-	Client.addIceCandidate(JSON.parse(data)).then(() => console.log("SUCCESS ADD"), (e) => console.log("ERROR"));
-	console.log(Client.connectionState);
+	Peers[id].addIceCandidate(JSON.parse(data));
 }

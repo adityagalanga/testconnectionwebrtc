@@ -5,6 +5,23 @@
 			"eventType": "block",
 			"conditions": [
 				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 256844924212068
+				}
+			],
+			"actions": [
+				{
+					"type": "script",
+					"script": "ClientRTC.CreateOffer();"
+				}
+			],
+			"sid": 437085117207649
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
 					"id": "on-key-pressed",
 					"objectClass": "Keyboard",
 					"sid": 201413889860843,
@@ -89,310 +106,372 @@
 			]
 		},
 		{
-			"functionName": "SignalIceCandidate",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [
-				{
-					"name": "icecandidate",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"sid": 543930190401969
-				}
-			],
-			"eventType": "function-block",
-			"conditions": [],
-			"actions": [],
-			"sid": 202360865446573,
+			"eventType": "group",
+			"disabled": false,
+			"title": "WebRTC CALLBACK",
+			"description": "",
+			"isActiveOnStart": true,
 			"children": [
 				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-by-unique-id",
-							"objectClass": "RequestData",
-							"sid": 894816653323686,
-							"parameters": {
-								"unique-id": "Functions.CreateRequest"
-							}
-						}
-					],
-					"actions": [
-						{
-							"callFunction": "RequestChangeInput",
-							"sid": 206946769632460,
-							"parameters": [
-								"\"candidate\"",
-								"\"down\""
-							]
-						},
-						{
-							"callFunction": "RequestAddContentString",
-							"sid": 370700495240449,
-							"parameters": [
-								"\"candidate\"",
-								"icecandidate"
-							]
-						},
-						{
-							"callFunction": "SendMessageSocket",
-							"sid": 735962411821206
-						}
-					],
-					"sid": 865309734846936
-				}
-			]
-		},
-		{
-			"functionName": "SendOffer",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [
-				{
-					"name": "offer",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"sid": 187036644091890
-				}
-			],
-			"eventType": "function-block",
-			"conditions": [],
-			"actions": [
-				{
-					"id": "log",
-					"objectClass": "Browser",
-					"sid": 757457062333331,
-					"disabled": true,
-					"parameters": {
-						"type": "log",
-						"message": "offer & \" INI YANG ASLI \""
-					}
-				}
-			],
-			"sid": 740416978476034,
-			"children": [
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-by-unique-id",
-							"objectClass": "RequestData",
-							"sid": 815797926595717,
-							"parameters": {
-								"unique-id": "Functions.CreateRequest"
-							}
-						}
-					],
-					"actions": [
-						{
-							"callFunction": "RequestChangeInput",
-							"sid": 979665785886786,
-							"parameters": [
-								"\"offer\"",
-								"\"down\""
-							]
-						},
-						{
-							"callFunction": "RequestAddContentString",
-							"sid": 471651539944496,
-							"parameters": [
-								"\"offer\"",
-								"offer"
-							]
-						},
-						{
-							"callFunction": "SendMessageSocket",
-							"sid": 110176234076147
-						}
-					],
-					"sid": 460490869830581
-				}
-			]
-		},
-		{
-			"functionName": "AcceptAnswer",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [
-				{
-					"name": "answer",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"sid": 142146853264686
-				}
-			],
-			"eventType": "function-block",
-			"conditions": [],
-			"actions": [],
-			"sid": 202127315282344,
-			"children": [
-				{
-					"eventType": "variable",
-					"name": "text",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 276444048726402
-				},
-				{
-					"eventType": "block",
+					"functionName": "OnOpenClient",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
 					"conditions": [],
 					"actions": [
 						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 702164887736043,
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 199790163099733,
 							"parameters": {
-								"variable": "text",
-								"value": "answer"
+								"type": "log",
+								"message": "\"CONNECTION OPEN\""
 							}
-						},
-						{
-							"type": "script",
-							"script": "ClientRTC.SetRemoteDescription((localVars.text));"
 						}
 					],
-					"sid": 147937023831421
-				}
-			]
-		},
-		{
-			"functionName": "AddCandidate",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [
-				{
-					"name": "candidate",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"sid": 409075937793460
-				}
-			],
-			"eventType": "function-block",
-			"conditions": [],
-			"actions": [],
-			"sid": 883662928238517,
-			"children": [
-				{
-					"eventType": "variable",
-					"name": "text",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 715405807324531
+					"sid": 951445361854793
 				},
 				{
-					"eventType": "block",
+					"functionName": "OnMessageClient",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "msg",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 395690792012657
+						}
+					],
+					"eventType": "function-block",
 					"conditions": [],
 					"actions": [
 						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 367823713610040,
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 303541348237152,
 							"parameters": {
-								"variable": "text",
-								"value": "candidate"
+								"type": "log",
+								"message": "\"NEW MESSAGE  :  \" & msg"
 							}
-						},
-						{
-							"id": "wait",
-							"objectClass": "System",
-							"sid": 365584104898615,
-							"parameters": {
-								"seconds": "0"
-							}
-						},
-						{
-							"type": "script",
-							"script": "ClientRTC.AddIceCandidate((localVars.text));"
 						}
 					],
-					"sid": 951676320627531
+					"sid": 422424369703716
+				},
+				{
+					"functionName": "OnErrorClient",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "msg",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 972775030400929
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 906708094883702,
+							"parameters": {
+								"type": "log",
+								"message": "\"CONNECTION ERROR\""
+							}
+						}
+					],
+					"sid": 449139117484102
+				},
+				{
+					"functionName": "OnCloseClient",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "msg",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 677745738092940
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 296771848467186,
+							"parameters": {
+								"type": "log",
+								"message": "\"CONNECTION CLOSE\""
+							}
+						}
+					],
+					"sid": 945372696834972
 				}
-			]
+			],
+			"sid": 752535175958394
 		},
 		{
-			"functionName": "OnOpenClient",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [],
-			"eventType": "function-block",
-			"conditions": [],
-			"actions": [
+			"eventType": "group",
+			"disabled": false,
+			"title": "WebRTC Function",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
 				{
-					"id": "log",
-					"objectClass": "Browser",
-					"sid": 361005500737712,
-					"parameters": {
-						"type": "log",
-						"message": "\"CONNECTION OPEN\""
-					}
+					"functionName": "SignalIceCandidate",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "icecandidate",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 543930190401969
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 756069727926574,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "RequestData",
+									"sid": 980799387338047,
+									"parameters": {
+										"unique-id": "Functions.CreateRequest"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "RequestChangeInput",
+									"sid": 832625064177171,
+									"parameters": [
+										"\"candidate\"",
+										"\"down\""
+									]
+								},
+								{
+									"callFunction": "RequestAddContentString",
+									"sid": 740004332722593,
+									"parameters": [
+										"\"candidate\"",
+										"icecandidate"
+									]
+								},
+								{
+									"callFunction": "SendMessageSocket",
+									"sid": 768082533680495
+								}
+							],
+							"sid": 402817372954064
+						}
+					]
+				},
+				{
+					"functionName": "SendOffer",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "offer",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 187036644091890
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 423034170198790,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "RequestData",
+									"sid": 636574758487085,
+									"parameters": {
+										"unique-id": "Functions.CreateRequest"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "RequestChangeInput",
+									"sid": 251795159621264,
+									"parameters": [
+										"\"offer\"",
+										"\"down\""
+									]
+								},
+								{
+									"callFunction": "RequestAddContentString",
+									"sid": 476672315581524,
+									"parameters": [
+										"\"offer\"",
+										"offer"
+									]
+								},
+								{
+									"callFunction": "SendMessageSocket",
+									"sid": 216154132468744
+								}
+							],
+							"sid": 177770174699142
+						}
+					]
+				},
+				{
+					"functionName": "AcceptAnswer",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "answer",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 142146853264686
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 632328880666522,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "text",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 575631019309668
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 471593681117409,
+									"parameters": {
+										"variable": "text",
+										"value": "answer"
+									}
+								},
+								{
+									"type": "script",
+									"script": "ClientRTC.SetRemoteDescription((localVars.text));"
+								}
+							],
+							"sid": 914603621210860
+						}
+					]
+				},
+				{
+					"functionName": "AddCandidate",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "candidate",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 409075937793460
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 879019092819257,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "text",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 941834970428731
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 919082310716959,
+									"parameters": {
+										"variable": "text",
+										"value": "candidate"
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 189731019123231,
+									"parameters": {
+										"seconds": "0"
+									}
+								},
+								{
+									"type": "script",
+									"script": "ClientRTC.AddIceCandidate((localVars.text));"
+								}
+							],
+							"sid": 494728252270678
+						}
+					]
 				}
 			],
-			"sid": 225025628107791
-		},
-		{
-			"functionName": "OnCloseClient",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [],
-			"eventType": "function-block",
-			"conditions": [],
-			"actions": [
-				{
-					"id": "log",
-					"objectClass": "Browser",
-					"sid": 203169405065112,
-					"parameters": {
-						"type": "log",
-						"message": "\"CONNECTION CLOSE\""
-					}
-				}
-			],
-			"sid": 982454882130925
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-start-of-layout",
-					"objectClass": "System",
-					"sid": 481752313467510
-				}
-			],
-			"actions": [
-				{
-					"type": "script",
-					"script": "ClientRTC.CreateOffer();"
-				}
-			],
-			"sid": 263979259684264
+			"sid": 792499818441645
 		}
 	],
 	"sid": 594897742848356

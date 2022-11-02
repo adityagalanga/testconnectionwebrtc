@@ -2,317 +2,387 @@
 	"name": "ServerRTC",
 	"events": [
 		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-key-pressed",
-					"objectClass": "Keyboard",
-					"sid": 356690564133747,
-					"parameters": {
-						"key": 69
-					}
-				}
-			],
-			"actions": [],
-			"sid": 516519878050185,
+			"eventType": "group",
+			"disabled": false,
+			"title": "WebRTC Function",
+			"description": "",
+			"isActiveOnStart": true,
 			"children": [
 				{
-					"eventType": "variable",
-					"name": "text",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 210399316261720
+					"functionName": "SignalIceCandidate",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "playerID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 452705593102941
+						},
+						{
+							"name": "icecandidate",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 177252568361325
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 832401211610658,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "RequestData",
+									"sid": 638749625790299,
+									"parameters": {
+										"unique-id": "Functions.CreateRequest"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "AddPlayerToRequest",
+									"sid": 832615853540119,
+									"parameters": [
+										"playerID"
+									]
+								},
+								{
+									"callFunction": "ChangeRequestInput",
+									"sid": 201561100078420,
+									"parameters": [
+										"\"candidate\""
+									]
+								},
+								{
+									"callFunction": "AddContentString",
+									"sid": 566802494486611,
+									"parameters": [
+										"\"candidate\"",
+										"icecandidate"
+									]
+								},
+								{
+									"callFunction": "SendMessageSocket",
+									"sid": 219577879613299
+								}
+							],
+							"sid": 574447345209050
+						}
+					]
 				},
 				{
-					"eventType": "block",
+					"functionName": "SendAnswer",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "playerID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 186301119497987
+						},
+						{
+							"name": "answer",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 198082245191964
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 561252694832613,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "RequestData",
+									"sid": 539642681598487,
+									"parameters": {
+										"unique-id": "Functions.CreateRequest"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "AddPlayerToRequest",
+									"sid": 444087546372628,
+									"parameters": [
+										"playerID"
+									]
+								},
+								{
+									"callFunction": "ChangeRequestInput",
+									"sid": 966058770478343,
+									"parameters": [
+										"\"answer\""
+									]
+								},
+								{
+									"callFunction": "AddContentString",
+									"sid": 320394864307750,
+									"parameters": [
+										"\"answer\"",
+										"answer"
+									]
+								},
+								{
+									"callFunction": "SendMessageSocket",
+									"sid": 742377779719073
+								}
+							],
+							"sid": 677725038163096
+						}
+					]
+				},
+				{
+					"functionName": "AcceptOffer",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "playerID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 364384113141143
+						},
+						{
+							"name": "offer",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 466433817549000
+						}
+					],
+					"eventType": "function-block",
 					"conditions": [],
 					"actions": [
 						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 204732581937723,
-							"parameters": {
-								"variable": "text",
-								"value": "IceInput.Text"
-							}
-						},
-						{
 							"type": "script",
-							"script": "ServerRTC.SendMessage((localVars.text));"
+							"script": "ServerRTC.CreateAnswer(localVars.playerID,localVars.offer);"
 						}
 					],
-					"sid": 884617129393027
-				}
-			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-key-pressed",
-					"objectClass": "Keyboard",
-					"sid": 367518529331243,
-					"parameters": {
-						"key": 87
-					}
-				}
-			],
-			"actions": [
-				{
-					"type": "script",
-					"script": "ServerRTC.CheckState();"
-				}
-			],
-			"sid": 758521292969322
-		},
-		{
-			"functionName": "SignalIceCandidate",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [
-				{
-					"name": "icecandidate",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"sid": 177252568361325
-				}
-			],
-			"eventType": "function-block",
-			"conditions": [],
-			"actions": [],
-			"sid": 468861272890905,
-			"children": [
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-by-unique-id",
-							"objectClass": "RequestData",
-							"sid": 369631570664011,
-							"parameters": {
-								"unique-id": "Functions.CreateRequest"
-							}
-						}
-					],
-					"actions": [
-						{
-							"callFunction": "AddAllPlayerToRequest",
-							"sid": 665793485958838
-						},
-						{
-							"callFunction": "ChangeRequestInput",
-							"sid": 758808222247972,
-							"parameters": [
-								"\"candidate\""
-							]
-						},
-						{
-							"callFunction": "AddContentString",
-							"sid": 841502523466797,
-							"parameters": [
-								"\"candidate\"",
-								"icecandidate"
-							]
-						},
-						{
-							"callFunction": "SendMessageSocket",
-							"sid": 157942259354437
-						}
-					],
-					"sid": 858301391950854
-				}
-			]
-		},
-		{
-			"functionName": "SendAnswer",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [
-				{
-					"name": "answer",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"sid": 198082245191964
-				}
-			],
-			"eventType": "function-block",
-			"conditions": [],
-			"actions": [],
-			"sid": 945064173914407,
-			"children": [
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-by-unique-id",
-							"objectClass": "RequestData",
-							"sid": 309045451348406,
-							"parameters": {
-								"unique-id": "Functions.CreateRequest"
-							}
-						}
-					],
-					"actions": [
-						{
-							"callFunction": "AddAllPlayerToRequest",
-							"sid": 161223891053618
-						},
-						{
-							"callFunction": "ChangeRequestInput",
-							"sid": 750833953900457,
-							"parameters": [
-								"\"answer\""
-							]
-						},
-						{
-							"callFunction": "AddContentString",
-							"sid": 698213885513030,
-							"parameters": [
-								"\"answer\"",
-								"answer"
-							]
-						},
-						{
-							"callFunction": "SendMessageSocket",
-							"sid": 925944865963287
-						}
-					],
-					"sid": 900357716318571
-				}
-			]
-		},
-		{
-			"functionName": "AcceptOffer",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [
-				{
-					"name": "offer",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"sid": 466433817549000
-				}
-			],
-			"eventType": "function-block",
-			"conditions": [],
-			"actions": [],
-			"sid": 753514586954558,
-			"children": [
-				{
-					"eventType": "variable",
-					"name": "text",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 590405284533552
+					"sid": 176922099879895
 				},
 				{
-					"eventType": "block",
+					"functionName": "AddCandidate",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "playerID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 982760310772765
+						},
+						{
+							"name": "candidate",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 574978816526975
+						}
+					],
+					"eventType": "function-block",
 					"conditions": [],
 					"actions": [
 						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 722409745847787,
-							"parameters": {
-								"variable": "text",
-								"value": "offer"
-							}
-						},
-						{
-							"id": "wait",
-							"objectClass": "System",
-							"sid": 784897251924148,
-							"parameters": {
-								"seconds": "0"
-							}
-						},
-						{
 							"type": "script",
-							"script": "ServerRTC.CreateAnswer((localVars.text));"
+							"script": "ServerRTC.AddIceCandidate(localVars.playerID,localVars.candidate);"
 						}
 					],
-					"sid": 631856123347257
-				}
-			]
-		},
-		{
-			"functionName": "AddCandidate",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [
-				{
-					"name": "candidate",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"sid": 574978816526975
+					"sid": 758780431523709
 				}
 			],
-			"eventType": "function-block",
-			"conditions": [],
-			"actions": [],
-			"sid": 967813362311991,
+			"sid": 448119579459209
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "WebRTC CallBack",
+			"description": "",
+			"isActiveOnStart": true,
 			"children": [
 				{
-					"eventType": "variable",
-					"name": "text",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 220049046717670
-				},
-				{
-					"eventType": "block",
+					"functionName": "OnOpenClient",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "playerID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 393639801768175
+						}
+					],
+					"eventType": "function-block",
 					"conditions": [],
 					"actions": [
 						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 363093233387422,
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 267138420128186,
 							"parameters": {
-								"variable": "text",
-								"value": "candidate"
+								"type": "log",
+								"message": "\"CONNECTION OPEN\""
 							}
-						},
-						{
-							"id": "wait",
-							"objectClass": "System",
-							"sid": 693118531310061,
-							"parameters": {
-								"seconds": "0"
-							}
-						},
-						{
-							"type": "script",
-							"script": "ServerRTC.AddIceCandidate((localVars.text));"
 						}
 					],
-					"sid": 699559989426272
+					"sid": 133722258365687
+				},
+				{
+					"functionName": "OnMessageClient",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "playerID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 782665169526428
+						},
+						{
+							"name": "msg",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 252806192000828
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 480691742287701,
+							"parameters": {
+								"type": "log",
+								"message": "\"NEW MESSAGE from ID  :  \" & playerID &newline\n&msg"
+							}
+						}
+					],
+					"sid": 102854809387323,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [],
+							"sid": 434254858529805
+						}
+					]
+				},
+				{
+					"functionName": "OnErrorClient",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "playerID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 727577067823113
+						},
+						{
+							"name": "msg",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 910390691899170
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 259289841530246,
+							"parameters": {
+								"type": "log",
+								"message": "\"CONNECTION ERROR from ID : \" & playerID"
+							}
+						}
+					],
+					"sid": 858614050205474
+				},
+				{
+					"functionName": "OnCloseClient",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "playerID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 977381645627506
+						},
+						{
+							"name": "msg",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 689554302341835
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 371764658093933,
+							"parameters": {
+								"type": "log",
+								"message": "\"CONNECTION CLOSE from ID : \" & playerID"
+							}
+						}
+					],
+					"sid": 400405035317343
 				}
-			]
+			],
+			"sid": 285141509635762
 		}
 	],
 	"sid": 162081071426536

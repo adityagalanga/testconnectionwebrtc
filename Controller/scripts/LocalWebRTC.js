@@ -32,11 +32,11 @@ export async function CreateOffer()
 		LocalConnection = new RTCPeerConnection(iceConfiguration);
 		dataChannel = LocalConnection.createDataChannel("channel");
 
-		dataChannel.onmessage = e => console.log(e.data);
-		dataChannel.onopen = () => console.log("masuk");
-		dataChannel.onerror = (error) => {
-  			console.log("Data Channel Error:", error);
-		};
+		//set callback
+		dataChannel.onopen = () => runtime.callFunction("OnOpenClient");
+		dataChannel.onmessage = e => runtime.callFunction("OnMessageClient",[e.data]);
+		dataChannel.onerror = (error) => runtime.callFunction("OnErrorClient",[error]);
+		dataChannel.onclose = (close) => runtime.callFunction("OnCloseClient",[close]);
 		
 		//ini diubah jadi ngirim data ice candidate
 		LocalConnection.onicecandidate = (event) => 
@@ -49,10 +49,10 @@ export async function CreateOffer()
 		
 		//ini yang nanti dikirim buat answer
 		LocalConnection.createOffer()
-		.then(offer => LocalConnection.setLocalDescription(offer))
-		.then(() => 
+		.then(offer => 
 		{
-			runtime.callFunction("SendOffer",[JSON.stringify(LocalConnection.localDescription)]);
+			LocalConnection.setLocalDescription(offer);
+			runtime.callFunction("SendOffer",[JSON.stringify(offer)]);
 		});
 	}
 }

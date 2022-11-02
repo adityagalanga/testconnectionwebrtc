@@ -553,8 +553,9 @@
 									"actions": [
 										{
 											"callFunction": "AcceptOffer",
-											"sid": 492185203899287,
+											"sid": 537692131282827,
 											"parameters": [
+												"WebsocketMessage.Get(\"data.id\")",
 												"WebsocketMessage.Get(\"data.content.offer\")"
 											]
 										}
@@ -578,8 +579,9 @@
 									"actions": [
 										{
 											"callFunction": "AddCandidate",
-											"sid": 308246015851017,
+											"sid": 460779445392035,
 											"parameters": [
+												"WebsocketMessage.Get(\"data.id\")",
 												"WebsocketMessage.Get(\"data.content.candidate\")"
 											]
 										}
