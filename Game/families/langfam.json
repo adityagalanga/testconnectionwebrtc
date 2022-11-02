@@ -7,18 +7,21 @@
 			"name": "localization_key",
 			"type": "string",
 			"desc": "",
+			"show": true,
 			"sid": 318966918311786
 		},
 		{
 			"name": "string1",
 			"type": "string",
 			"desc": "",
+			"show": true,
 			"sid": 962006611769116
 		},
 		{
 			"name": "string2",
 			"type": "string",
 			"desc": "",
+			"show": true,
 			"sid": 502967849596684
 		}
 	],

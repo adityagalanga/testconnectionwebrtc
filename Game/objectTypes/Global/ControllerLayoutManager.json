@@ -1,20 +1,15 @@
 {
-	"name": "PlayerConsole",
+	"name": "ControllerLayoutManager",
 	"plugin-id": "Sprite",
-	"sid": 930563682141686,
+	"sid": 607272228510179,
 	"isGlobal": true,
 	"instanceVariables": [
 		{
-			"name": "id",
+			"name": "CURRENT_LAYOUT",
 			"type": "string",
 			"desc": "",
-			"sid": 243915861637672
-		},
-		{
-			"name": "name",
-			"type": "string",
-			"desc": "",
-			"sid": 169116679497815
+			"show": true,
+			"sid": 779543571880224
 		}
 	],
 	"behaviorTypes": [],
@@ -24,19 +19,19 @@
 			{
 				"frames": [
 					{
-						"width": 250,
-						"height": 250,
+						"width": 10,
+						"height": 10,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "lossless",
 						"exportQuality": 0.8,
-						"imageSpriteId": 47136,
+						"imageSpriteId": 3395584,
 						"useCollisionPoly": true,
 						"duration": 1
 					}
 				],
-				"sid": 738713342937612,
+				"sid": 706652963272875,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,

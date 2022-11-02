@@ -1,6 +1,6 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 30802,
+	"savedWithRelease": 31700,
 	"name": "TemplateGameConstruct3",
 	"runtime": "c3",
 	"useWorker": "auto",
@@ -11,7 +11,7 @@
 			"id": "AJAX",
 			"name": "AJAX",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		},
 		{
@@ -19,7 +19,7 @@
 			"id": "Audio",
 			"name": "Audio",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		},
 		{
@@ -27,7 +27,7 @@
 			"id": "Browser",
 			"name": "Browser",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		},
 		{
@@ -35,7 +35,7 @@
 			"id": "PlatformInfo",
 			"name": "Platform info",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		},
 		{
@@ -43,7 +43,7 @@
 			"id": "Timeline",
 			"name": "Timeline controller",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		},
 		{
@@ -51,7 +51,7 @@
 			"id": "C2WebSocket",
 			"name": "WebSocket",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		},
 		{
@@ -59,7 +59,7 @@
 			"id": "Text",
 			"name": "Text",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		},
 		{
@@ -67,7 +67,7 @@
 			"id": "Json",
 			"name": "JSON",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		},
 		{
@@ -75,7 +75,7 @@
 			"id": "Sprite",
 			"name": "Sprite",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		},
 		{
@@ -83,7 +83,7 @@
 			"id": "Dictionary",
 			"name": "Dictionary",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		},
 		{
@@ -91,7 +91,7 @@
 			"id": "TiledBg",
 			"name": "Tiled Background",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		},
 		{
@@ -99,7 +99,7 @@
 			"id": "Button",
 			"name": "Button",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		},
 		{
@@ -107,7 +107,7 @@
 			"id": "Keyboard",
 			"name": "Keyboard",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		},
 		{
@@ -115,7 +115,7 @@
 			"id": "TextBox",
 			"name": "Text input",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		},
 		{
@@ -123,7 +123,7 @@
 			"id": "Anchor",
 			"name": "Anchor",
 			"author": "Scirra",
-			"version": "r308.2",
+			"version": "r317",
 			"bundled": false
 		}
 	],
@@ -419,7 +419,8 @@
 		"preloadSounds": true,
 		"cordovaiOSScheme": "app",
 		"cordovaAndroidScheme": "https",
-		"autoReloadScriptsOnPreview": false
+		"autoReloadScriptsOnPreview": false,
+		"exportFileStructure": "flat"
 	},
 	"viewportWidth": 1920,
 	"viewportHeight": 1080,

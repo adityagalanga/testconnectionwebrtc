@@ -8,6 +8,7 @@
 			"name": "direct",
 			"type": "string",
 			"desc": "",
+			"show": true,
 			"sid": 782270341744680
 		}
 	],

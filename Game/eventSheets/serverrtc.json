@@ -49,6 +49,26 @@
 			]
 		},
 		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 367518529331243,
+					"parameters": {
+						"key": 87
+					}
+				}
+			],
+			"actions": [
+				{
+					"type": "script",
+					"script": "ServerRTC.CheckState();"
+				}
+			],
+			"sid": 758521292969322
+		},
+		{
 			"functionName": "SignalIceCandidate",
 			"functionDescription": "",
 			"functionCategory": "",

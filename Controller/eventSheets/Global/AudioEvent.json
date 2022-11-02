@@ -82,6 +82,7 @@
 								"audio-file-name": "sound_name",
 								"loop": "looping",
 								"volume": "BGM_SOUND",
+								"stereo-pan": "0",
 								"tag-optional": "\"BGM\""
 							}
 						}
@@ -163,6 +164,7 @@
 										"audio-file-name": "sound_name",
 										"loop": "not-looping",
 										"volume": "SFX_SOUND",
+										"stereo-pan": "0",
 										"tag-optional": "alias_name =\"\" ?  sound_name : alias_name"
 									}
 								}
@@ -190,6 +192,7 @@
 								"audio-file-name": "sound_name",
 								"loop": "not-looping",
 								"volume": "SFX_SOUND",
+								"stereo-pan": "0",
 								"tag-optional": "alias_name =\"\" ?  sound_name : alias_name"
 							}
 						}

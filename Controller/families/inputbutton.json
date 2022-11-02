@@ -7,18 +7,21 @@
 			"name": "input_name",
 			"type": "string",
 			"desc": "",
+			"show": true,
 			"sid": 864850829969972
 		},
 		{
 			"name": "use_release",
 			"type": "boolean",
 			"desc": "",
+			"show": true,
 			"sid": 709996244343655
 		},
 		{
 			"name": "touch_id",
 			"type": "number",
 			"desc": "",
+			"show": true,
 			"sid": 146665553360358
 		}
 	],

@@ -376,6 +376,23 @@
 				}
 			],
 			"sid": 982454882130925
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 481752313467510
+				}
+			],
+			"actions": [
+				{
+					"type": "script",
+					"script": "ClientRTC.CreateOffer();"
+				}
+			],
+			"sid": 263979259684264
 		}
 	],
 	"sid": 594897742848356

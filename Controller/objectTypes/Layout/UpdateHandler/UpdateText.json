@@ -8,7 +8,8 @@
 			"name": "CountDot",
 			"type": "number",
 			"desc": "",
-			"sid": 385821254207421
+			"show": true,
+			"sid": 122114290381308
 		}
 	],
 	"behaviorTypes": [],

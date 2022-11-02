@@ -8,18 +8,21 @@
 			"name": "XP",
 			"type": "number",
 			"desc": "",
+			"show": true,
 			"sid": 676206316070254
 		},
 		{
 			"name": "YP",
 			"type": "number",
 			"desc": "",
+			"show": true,
 			"sid": 521733285789215
 		},
 		{
 			"name": "conAngle",
 			"type": "number",
 			"desc": "",
+			"show": true,
 			"sid": 471314560936805
 		}
 	],
