@@ -1,7 +1,7 @@
 {
-	"name": "ConnectWEBRTC",
+	"name": "SendPongSocket",
 	"plugin-id": "Button",
-	"sid": 875438753155924,
+	"sid": 874874664775821,
 	"isGlobal": false,
 	"instanceVariables": [],
 	"behaviorTypes": []

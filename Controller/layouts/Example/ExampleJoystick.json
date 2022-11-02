@@ -496,6 +496,20 @@
 			"properties": {},
 			"uid": 45,
 			"instanceVariables": {}
+		},
+		{
+			"type": "WebRTCMessage",
+			"properties": {},
+			"uid": 59,
+			"instanceVariables": {}
+		},
+		{
+			"type": "BinaryData",
+			"properties": {
+				"endian": "big"
+			},
+			"uid": 62,
+			"instanceVariables": {}
 		}
 	],
 	"effectTypes": [],

@@ -270,6 +270,12 @@
 			"properties": {},
 			"uid": 22,
 			"instanceVariables": {}
+		},
+		{
+			"type": "JSON",
+			"properties": {},
+			"uid": 19,
+			"instanceVariables": {}
 		}
 	],
 	"effectTypes": [],

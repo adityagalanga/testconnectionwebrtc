@@ -27,7 +27,7 @@ export const iceConfiguration = {
 
 export function CreateAnswer(id,offer)
 {
-	Peers[id] = new RTCPeerConnection(iceConfiguration);
+	Peers[id] = new RTCPeerConnection();
 
 	//ini diubah jadi ngirim data ice candidate
 	Peers[id].onicecandidate = (event) => {
@@ -59,6 +59,7 @@ export function CreateAnswer(id,offer)
 
 export function SendMessage(id,data)
 {
+	console.log(data);
 	dataChannel[id].send(data);
 }
 

@@ -587,6 +587,75 @@
 										}
 									],
 									"sid": 734431532338935
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-value",
+											"objectClass": "WebsocketMessage",
+											"sid": 641585126830867,
+											"parameters": {
+												"path": "\"data.input\"",
+												"cmp": 0,
+												"value": "\"ping\""
+											}
+										}
+									],
+									"actions": [],
+									"sid": 927981406532987,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-unique-id",
+													"objectClass": "RequestData",
+													"sid": 285142909775885,
+													"parameters": {
+														"unique-id": "Functions.CreateRequest"
+													}
+												}
+											],
+											"actions": [
+												{
+													"callFunction": "AddPlayerToRequest",
+													"sid": 276622825170203,
+													"parameters": [
+														"WebsocketMessage.Get(\"data.id\")"
+													]
+												},
+												{
+													"callFunction": "ChangeRequestInput",
+													"sid": 839331767886497,
+													"parameters": [
+														"\"pong\""
+													]
+												},
+												{
+													"callFunction": "AddContentNumber",
+													"sid": 936615322480216,
+													"parameters": [
+														"\"date\"",
+														"WebsocketMessage.Get(\"data.content.date\")"
+													]
+												},
+												{
+													"callFunction": "AddContentNumber",
+													"sid": 470927857157921,
+													"parameters": [
+														"\"num\"",
+														"WebsocketMessage.Get(\"data.content.num\")"
+													]
+												},
+												{
+													"callFunction": "SendMessageSocket",
+													"sid": 338617591617015
+												}
+											],
+											"sid": 168385304965662
+										}
+									]
 								}
 							]
 						}

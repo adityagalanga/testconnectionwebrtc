@@ -217,6 +217,73 @@
 						}
 					],
 					"sid": 758780431523709
+				},
+				{
+					"functionName": "SendMessageWebRTC",
+					"functionDescription": "",
+					"functionCategory": "RequestData Socket",
+					"functionReturnType": "none",
+					"functionCopyPicked": true,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "playerID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 587799176767533
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 383528638833544,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "msg",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 225094482798884
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 547556569703623,
+									"parameters": {
+										"variable": "msg",
+										"value": "RequestData.ToCompactString"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 693691390616290,
+									"parameters": {
+										"type": "log",
+										"message": "\"Send Message WebRTC : \" & RequestData.ToBeautifiedString"
+									}
+								},
+								{
+									"type": "script",
+									"script": "ServerRTC.SendMessage(localVars.playerID,localVars.msg);"
+								},
+								{
+									"id": "destroy",
+									"objectClass": "RequestData",
+									"sid": 980998887585277
+								}
+							],
+							"sid": 464999359769407
+						}
+					]
 				}
 			],
 			"sid": 448119579459209
@@ -293,14 +360,69 @@
 								"type": "log",
 								"message": "\"NEW MESSAGE from ID  :  \" & playerID &newline\n&msg"
 							}
+						},
+						{
+							"id": "parse",
+							"objectClass": "JSON",
+							"sid": 700358722573193,
+							"parameters": {
+								"data": "msg"
+							}
 						}
 					],
 					"sid": 102854809387323,
 					"children": [
 						{
 							"eventType": "block",
-							"conditions": [],
-							"actions": [],
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "RequestData",
+									"sid": 398142896138381,
+									"parameters": {
+										"unique-id": "Functions.CreateRequest"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "AddPlayerToRequest",
+									"sid": 491860911129150,
+									"parameters": [
+										"playerID"
+									]
+								},
+								{
+									"callFunction": "ChangeRequestInput",
+									"sid": 896191674256364,
+									"parameters": [
+										"\"pong\""
+									]
+								},
+								{
+									"callFunction": "AddContentNumber",
+									"sid": 460988452893471,
+									"parameters": [
+										"\"date\"",
+										"JSON.Get(\"data.content.date\")"
+									]
+								},
+								{
+									"callFunction": "AddContentNumber",
+									"sid": 671989577054505,
+									"parameters": [
+										"\"num\"",
+										"JSON.Get(\"data.content.num\")"
+									]
+								},
+								{
+									"callFunction": "SendMessageWebRTC",
+									"sid": 748117254633338,
+									"parameters": [
+										"playerID"
+									]
+								}
+							],
 							"sid": 434254858529805
 						}
 					]

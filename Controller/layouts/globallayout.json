@@ -89,37 +89,6 @@
 						"angle": 0,
 						"zElevation": 0
 					}
-				},
-				{
-					"type": "ConnectWEBRTC",
-					"properties": {
-						"type": "button",
-						"text": "Connect WEB RTC",
-						"tooltip": "",
-						"initially-visible": true,
-						"enabled": true,
-						"auto-font-size": true,
-						"checked": false,
-						"id": "",
-						"class": ""
-					},
-					"uid": 27,
-					"instanceVariables": {},
-					"behaviors": {},
-					"world": {
-						"x": 78,
-						"y": 920,
-						"width": 344.69986945167244,
-						"height": 114.8999564838908,
-						"originX": 0,
-						"originY": 0,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						]
-					}
 				}
 			],
 			"sid": 548767249960331,

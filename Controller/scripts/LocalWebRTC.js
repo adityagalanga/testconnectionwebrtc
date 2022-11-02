@@ -29,7 +29,7 @@ export async function CreateOffer()
 {
 	if(LocalConnection == null)
 	{
-		LocalConnection = new RTCPeerConnection(iceConfiguration);
+		LocalConnection = new RTCPeerConnection();
 		dataChannel = LocalConnection.createDataChannel("channel");
 
 		//set callback
@@ -66,16 +66,6 @@ export function SetRemoteDescription(data)
 export function SendMessage(data)
 {
 	dataChannel.send(data);
-}
-
-export function CheckState()
-{
-	console.log(LocalConnection.signalingState);
-	console.log(LocalConnection.connectionState);
-	console.log(LocalConnection.iceConnectionState);
-	console.log(LocalConnection.iceGatheringState);
-	console.log(LocalConnection.currentLocalDescription);
-	console.log(LocalConnection.currentRemoteDescription);
 }
 
 export function AddIceCandidate(data)

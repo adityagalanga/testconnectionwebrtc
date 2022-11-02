@@ -2,6 +2,26 @@
 	"name": "MainMenuEvent",
 	"events": [
 		{
+			"eventType": "variable",
+			"name": "numRTC",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 249485173069597
+		},
+		{
+			"eventType": "variable",
+			"name": "numSocket",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 707237202644145
+		},
+		{
 			"eventType": "include",
 			"includeSheet": "WebSocketEvent"
 		},
@@ -72,6 +92,140 @@
 				}
 			],
 			"sid": 233815402217230
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "SendPongRTC",
+					"sid": 517947694752929
+				}
+			],
+			"actions": [],
+			"sid": 396901407614055,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "RequestData",
+							"sid": 895554850543171,
+							"parameters": {
+								"unique-id": "Functions.CreateRequest"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "RequestChangeInput",
+							"sid": 668600162516064,
+							"parameters": [
+								"\"ping\"",
+								"\"down\""
+							]
+						},
+						{
+							"callFunction": "RequestAddContentNumber",
+							"sid": 734731274009152,
+							"parameters": [
+								"\"date\"",
+								"Date.Now"
+							]
+						},
+						{
+							"callFunction": "RequestAddContentNumber",
+							"sid": 245460957033182,
+							"parameters": [
+								"\"num\"",
+								"numRTC"
+							]
+						},
+						{
+							"id": "add-to-eventvar",
+							"objectClass": "System",
+							"sid": 641019391931290,
+							"parameters": {
+								"variable": "numRTC",
+								"value": "1"
+							}
+						},
+						{
+							"callFunction": "SendMessageWebRTC",
+							"sid": 226867536545212
+						}
+					],
+					"sid": 741305355527943
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "SendPongSocket",
+					"sid": 611364982215447
+				}
+			],
+			"actions": [],
+			"sid": 963837231858812,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "RequestData",
+							"sid": 522440605611900,
+							"parameters": {
+								"unique-id": "Functions.CreateRequest"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "RequestChangeInput",
+							"sid": 936473889311771,
+							"parameters": [
+								"\"ping\"",
+								"\"down\""
+							]
+						},
+						{
+							"callFunction": "RequestAddContentNumber",
+							"sid": 326287650368394,
+							"parameters": [
+								"\"date\"",
+								"Date.Now"
+							]
+						},
+						{
+							"callFunction": "RequestAddContentNumber",
+							"sid": 378105641238741,
+							"parameters": [
+								"\"num\"",
+								"numSocket"
+							]
+						},
+						{
+							"id": "add-to-eventvar",
+							"objectClass": "System",
+							"sid": 131827433140529,
+							"parameters": {
+								"variable": "numSocket",
+								"value": "1"
+							}
+						},
+						{
+							"callFunction": "SendMessageSocket",
+							"sid": 489282711251376
+						}
+					],
+					"sid": 288043027102733
+				}
+			]
 		}
 	],
 	"sid": 494991316765729

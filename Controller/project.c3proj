@@ -135,6 +135,22 @@
 			"bundled": false
 		},
 		{
+			"type": "plugin",
+			"id": "Date",
+			"name": "Date",
+			"author": "Scirra",
+			"version": "r317",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "BinaryData",
+			"name": "Binary Data",
+			"author": "Scirra",
+			"version": "r317",
+			"bundled": false
+		},
+		{
 			"type": "behavior",
 			"id": "Anchor",
 			"name": "Anchor",
@@ -148,9 +164,13 @@
 		"items": [
 			"Text",
 			"IceInput",
-			"ConnectWEBRTC",
+			"SendPongRTC",
 			"InfoWebRTCConnection",
-			"CheckData"
+			"CheckData",
+			"CheckSpeedText",
+			"SendPongSocket",
+			"Date",
+			"BinaryData"
 		],
 		"subfolders": [
 			{
@@ -164,7 +184,8 @@
 					"ButtonConnectSocket",
 					"Keyboard",
 					"localization",
-					"CurrentMessageData"
+					"CurrentMessageData",
+					"WebRTCMessage"
 				],
 				"subfolders": [
 					{

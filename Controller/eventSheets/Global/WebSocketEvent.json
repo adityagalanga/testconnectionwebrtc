@@ -755,6 +755,32 @@
 												}
 											],
 											"sid": 377426977114215
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-value",
+													"objectClass": "WebsocketMessage",
+													"sid": 562787921513343,
+													"parameters": {
+														"path": "\"data.input\"",
+														"cmp": 0,
+														"value": "\"pong\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-text",
+													"objectClass": "CheckSpeedText",
+													"sid": 302460980545140,
+													"parameters": {
+														"text": "CheckSpeedText.Text & newline &\n\"WEB SOCKET \"& WebsocketMessage.Get(\"data.content.num\") &\" :  \" & (Date.Now - WebsocketMessage.Get(\"data.content.date\")) & \"ms\""
+													}
+												}
+											],
+											"sid": 342250713483224
 										}
 									]
 								}

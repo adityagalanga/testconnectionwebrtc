@@ -133,7 +133,8 @@
 			"ConnectWEBRTC",
 			"InfoWebRTCConnection",
 			"Keyboard",
-			"IceInput"
+			"IceInput",
+			"JSON"
 		],
 		"subfolders": [
 			{

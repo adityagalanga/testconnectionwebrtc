@@ -2,6 +2,16 @@
 	"name": "ClientRTC",
 	"events": [
 		{
+			"eventType": "variable",
+			"name": "lastTime",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 106845297652370
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -17,93 +27,6 @@
 				}
 			],
 			"sid": 437085117207649
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-key-pressed",
-					"objectClass": "Keyboard",
-					"sid": 201413889860843,
-					"parameters": {
-						"key": 65
-					}
-				}
-			],
-			"actions": [
-				{
-					"type": "script",
-					"script": "ClientRTC.CreateOffer();"
-				}
-			],
-			"sid": 404631631809797
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-key-pressed",
-					"objectClass": "Keyboard",
-					"sid": 230625544690344,
-					"parameters": {
-						"key": 83
-					}
-				}
-			],
-			"actions": [
-				{
-					"type": "script",
-					"script": "ClientRTC.CheckState();"
-				}
-			],
-			"sid": 800310428828437
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-key-pressed",
-					"objectClass": "Keyboard",
-					"sid": 774302622379716,
-					"parameters": {
-						"key": 68
-					}
-				}
-			],
-			"actions": [],
-			"sid": 387077451780445,
-			"children": [
-				{
-					"eventType": "variable",
-					"name": "text",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 648766233671515
-				},
-				{
-					"eventType": "block",
-					"conditions": [],
-					"actions": [
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 629929528578973,
-							"parameters": {
-								"variable": "text",
-								"value": "IceInput.Text"
-							}
-						},
-						{
-							"type": "script",
-							"script": "ClientRTC.SendMessage(\"TESTER\");"
-						}
-					],
-					"sid": 684787012943919
-				}
-			]
 		},
 		{
 			"eventType": "group",
@@ -162,9 +85,85 @@
 								"type": "log",
 								"message": "\"NEW MESSAGE  :  \" & msg"
 							}
+						},
+						{
+							"id": "parse",
+							"objectClass": "WebRTCMessage",
+							"sid": 619401548268388,
+							"parameters": {
+								"data": "msg"
+							}
 						}
 					],
-					"sid": 422424369703716
+					"sid": 422424369703716,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "has-key",
+									"objectClass": "WebRTCMessage",
+									"sid": 836691134386553,
+									"parameters": {
+										"path": "\"type\""
+									}
+								}
+							],
+							"actions": [],
+							"sid": 185117955596365,
+							"children": [
+								{
+									"eventType": "comment",
+									"text": "Message from server"
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-value",
+											"objectClass": "WebRTCMessage",
+											"sid": 505447581917732,
+											"parameters": {
+												"path": "\"type\"",
+												"cmp": 0,
+												"value": "\"4001\""
+											}
+										}
+									],
+									"actions": [],
+									"sid": 207460775693892,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-value",
+													"objectClass": "WebRTCMessage",
+													"sid": 212713566654239,
+													"parameters": {
+														"path": "\"data.input\"",
+														"cmp": 0,
+														"value": "\"pong\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-text",
+													"objectClass": "CheckSpeedText",
+													"sid": 599753583056786,
+													"parameters": {
+														"text": "CheckSpeedText.Text & newline &\n\"WEB RTC \"& WebRTCMessage.Get(\"data.content.num\") &\" :  \" & (Date.Now- WebRTCMessage.Get(\"data.content.date\")) & \"ms\""
+													}
+												}
+											],
+											"sid": 452683901309692
+										}
+									]
+								}
+							]
+						}
+					]
 				},
 				{
 					"functionName": "OnErrorClient",
@@ -467,6 +466,65 @@
 								}
 							],
 							"sid": 494728252270678
+						}
+					]
+				},
+				{
+					"functionName": "SendMessageWebRTC",
+					"functionDescription": "",
+					"functionCategory": "RequestData Socket",
+					"functionReturnType": "none",
+					"functionCopyPicked": true,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 952186534247933,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "msg",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 996964379839508
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 328829272455815,
+									"parameters": {
+										"variable": "msg",
+										"value": "RequestData.ToCompactString"
+									}
+								},
+								{
+									"type": "script",
+									"script": "ClientRTC.SendMessage(localVars.msg);"
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 651170456396464,
+									"parameters": {
+										"type": "log",
+										"message": "\"Send Message WEBRTC : \" & RequestData.ToBeautifiedString"
+									}
+								},
+								{
+									"id": "destroy",
+									"objectClass": "RequestData",
+									"sid": 883258046709756
+								}
+							],
+							"sid": 891734473790001
 						}
 					]
 				}
