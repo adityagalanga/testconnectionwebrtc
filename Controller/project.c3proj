@@ -313,7 +313,7 @@
 					}
 				},
 				{
-					"name": "ClientRTC.js",
+					"name": "LocalWebRTC.js",
 					"type": "application/javascript",
 					"sid": 987939529742660,
 					"script-info": {

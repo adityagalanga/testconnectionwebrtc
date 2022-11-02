@@ -11,7 +11,7 @@ async function OnBeforeProjectStart(run)
 	runtime = run;
 }
 
-export let Server;
+export let LocalConnection;
 export let dataChannel;
 
 export const iceConfiguration = {
@@ -27,10 +27,10 @@ export const iceConfiguration = {
 
 export async function CreateOffer()
 {
-	if(Server == null)
+	if(LocalConnection == null)
 	{
-		Server = new RTCPeerConnection(iceConfiguration);
-		dataChannel = Server.createDataChannel("channel");
+		LocalConnection = new RTCPeerConnection(iceConfiguration);
+		dataChannel = LocalConnection.createDataChannel("channel");
 
 		dataChannel.onmessage = e => console.log(e.data);
 		dataChannel.onopen = () => console.log("masuk");
@@ -39,7 +39,7 @@ export async function CreateOffer()
 		};
 		
 		//ini diubah jadi ngirim data ice candidate
-		Server.onicecandidate = (event) => 
+		LocalConnection.onicecandidate = (event) => 
 		{
 			if(event.candidate != null)
 			{
@@ -48,18 +48,18 @@ export async function CreateOffer()
 		};
 		
 		//ini yang nanti dikirim buat answer
-		Server.createOffer()
-		.then(offer => Server.setLocalDescription(offer))
+		LocalConnection.createOffer()
+		.then(offer => LocalConnection.setLocalDescription(offer))
 		.then(() => 
 		{
-			runtime.callFunction("SendOffer",[JSON.stringify(Server.localDescription)]);
+			runtime.callFunction("SendOffer",[JSON.stringify(LocalConnection.localDescription)]);
 		});
 	}
 }
 
 export function SetRemoteDescription(data)
 {
-	Server.setRemoteDescription(JSON.parse(data));
+	LocalConnection.setRemoteDescription(JSON.parse(data));
 	console.log(JSON.parse(data));
 }
 
@@ -70,16 +70,16 @@ export function SendMessage(data)
 
 export function CheckState()
 {
-	console.log(Server.signalingState);
-	console.log(Server.connectionState);
-	console.log(Server.iceConnectionState);
-	console.log(Server.iceGatheringState);
-	console.log(Server.currentLocalDescription);
-	console.log(Server.currentRemoteDescription);
+	console.log(LocalConnection.signalingState);
+	console.log(LocalConnection.connectionState);
+	console.log(LocalConnection.iceConnectionState);
+	console.log(LocalConnection.iceGatheringState);
+	console.log(LocalConnection.currentLocalDescription);
+	console.log(LocalConnection.currentRemoteDescription);
 }
 
 export function AddIceCandidate(data)
 {
-	Server.addIceCandidate(JSON.parse(data)).then(() => console.log("SUCCESS ADD ICE"), (e) => console.add("ERROR"));
-	console.log(Server.connectionState);
+	LocalConnection.addIceCandidate(JSON.parse(data)).then(() => console.log("SUCCESS ADD ICE"), (e) => console.add("ERROR"));
+	console.log(LocalConnection.connectionState);
 }
